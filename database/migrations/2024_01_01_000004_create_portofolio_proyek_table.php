@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('portofolio_proyek', function (Blueprint $table) {
             $table->id();
             $table->string('nama_proyek');
+            $table->text('deskripsi')->nullable();
             $table->string('lokasi');
             $table->string('lokasi_google_maps')->nullable();
             $table->string('dokumentasi_proyek')->nullable();

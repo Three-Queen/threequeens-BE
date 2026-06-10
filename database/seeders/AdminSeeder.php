@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\ManajemenBeranda;
 use App\Models\ManajemenKontak;
 use App\Models\ManajemenTentang;
+use App\Models\PortofolioProyek;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -41,9 +42,11 @@ class AdminSeeder extends Seeder
         // =========================================
         // Default Data Tentang
         // =========================================
-        ManajemenTentang::firstOrCreate(['id' => 1], [
-            'title'     => 'Tentang Three Queen Interior',
-            'deskripsi' => 'Three Queen Interior adalah perusahaan desain interior terpercaya yang telah berpengalaman dalam menciptakan ruangan indah dan fungsional. Kami berkomitmen untuk memberikan solusi terbaik bagi setiap klien kami dengan mengutamakan kualitas, estetika, dan kepuasan pelanggan.',
+        ManajemenTentang::updateOrCreate(['id' => 1], [
+            'title'     => 'Kami Menciptakan Ruangan Impian Anda!',
+            'deskripsi' => "Three Queens adalah perusahaan furniture custom dan desain interior yang berdiri sejak 2019. Kami berkomitmen menghadirkan solusi desain yang memadukan estetika dan fungsionalitas untuk setiap ruang yang kami kerjakan.\n\nDengan pengalaman lebih dari 5 tahun dan ratusan proyek yang telah selesai, kami memahami bahwa setiap klien memiliki kebutuhan yang unik. Oleh karena itu, kami menawarkan layanan fully custom dari tahap konsultasi hingga instalasi.",
+            'gambar1'   => 'gambar1.png',
+            'gambar2'   => 'gambar2.png',
         ]);
 
         // =========================================
@@ -55,6 +58,55 @@ class AdminSeeder extends Seeder
             'email'     => 'info@threequeen.com',
             'jam_kerja' => 'Senin - Sabtu: 08.00 - 17.00 WIB',
         ]);
+
+        // =========================================
+        // Default Data Portofolio
+        // =========================================
+        $portfolios = [
+            [
+                'nama_proyek' => 'Appartemen Studio - Winduhaji',
+                'lokasi' => 'Kuningan - 2026',
+                'dokumentasi_proyek' => 'gambar3.png',
+                'deskripsi' => 'Desain interior apartemen studio yang efisien dengan pemanfaatan ruang vertikal secara maksimal, bernuansa kayu hangat dan pencahayaan dramatis.'
+            ],
+            [
+                'nama_proyek' => 'Appartemen Studio - Winduhaji',
+                'lokasi' => 'Kuningan - 2026',
+                'dokumentasi_proyek' => 'gambar1.png',
+                'deskripsi' => 'Konsep tata ruang apartemen dengan furniture multifungsi terintegrasi untuk menciptakan kesan luas pada area terbatas.'
+            ],
+            [
+                'nama_proyek' => 'Appartemen Studio Band - Winduhaji',
+                'lokasi' => 'Kuningan - 2026',
+                'dokumentasi_proyek' => 'gambar2.png',
+                'deskripsi' => 'Studio latihan musik pribadi bernuansa akustik premium dengan penataan kedap suara dan pencahayaan panggung minimalis.'
+            ],
+            [
+                'nama_proyek' => 'Kitchen Set L - Shape Premium',
+                'lokasi' => 'Kuningan - 2026',
+                'dokumentasi_proyek' => 'gambar3.png',
+                'deskripsi' => 'Kitchen set minimalis bentuk L dengan island table berlapis kuarsa putih mewah dan kabinet bertekstur kayu alami.'
+            ],
+            [
+                'nama_proyek' => 'Kitchen Set L - Shape Premium',
+                'lokasi' => 'Kuningan - 2026',
+                'dokumentasi_proyek' => 'gambar1.png',
+                'deskripsi' => 'Kitchen set modern berteknologi soft-close dengan ruang penyimpanan luas untuk memaksimalkan fungsionalitas dapur.'
+            ],
+            [
+                'nama_proyek' => 'Kitchen Set L - Shape Premium',
+                'lokasi' => 'Kuningan - 2026',
+                'dokumentasi_proyek' => 'gambar2.png',
+                'deskripsi' => 'Kitchen set elegan bernuansa monokromatik abu-abu gelap dengan backsplash marmer dan pencahayaan strip LED tersembunyi.'
+            ]
+        ];
+
+        foreach ($portfolios as $p) {
+            PortofolioProyek::firstOrCreate(
+                ['nama_proyek' => $p['nama_proyek'], 'dokumentasi_proyek' => $p['dokumentasi_proyek']],
+                ['lokasi' => $p['lokasi'], 'deskripsi' => $p['deskripsi']]
+            );
+        }
 
         $this->command->info('✅ Data default berhasil dibuat.');
     }

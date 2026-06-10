@@ -13,6 +13,7 @@ class PortofolioProyek extends Model
 
     protected $fillable = [
         'nama_proyek',
+        'deskripsi',
         'lokasi',
         'lokasi_google_maps',
         'dokumentasi_proyek',
