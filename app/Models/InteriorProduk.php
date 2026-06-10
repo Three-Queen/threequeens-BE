@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
+
+class InteriorProduk extends Model
+{
+    use HasFactory;
+
+    protected $table = 'interior_produk';
+
+    protected $fillable = [
+        'nama_produk',
+        'deskripsi_produk',
+        'harga_produk',
+        'gambar_produk',
+        'desain_produk_3d',
+        'desain_produk_2d',
+        'pengerjaan_produk',
+        'kategori_id',
+    ];
+
+    protected $casts = [
+        'harga_produk' => 'decimal:2',
+    ];
+
+    public function kategori(): BelongsTo
+    {
+        return $this->belongsTo(KategoriInterior::class, 'kategori_id');
+    }
+
+    public function getGambarUrlAttribute(): ?string
+    {
+        return $this->gambar_produk ? asset('storage/' . $this->gambar_produk) : null;
+    }
+
+    public function getDesain3dUrlAttribute(): ?string
+    {
+        return $this->desain_produk_3d ? asset('storage/' . $this->desain_produk_3d) : null;
+    }
+
+    public function getDesain2dUrlAttribute(): ?string
+    {
+        return $this->desain_produk_2d ? asset('storage/' . $this->desain_produk_2d) : null;
+    }
+
+    public function getHargaFormatAttribute(): string
+    {
+        return 'Rp ' . number_format($this->harga_produk, 0, ',', '.');
+    }
+}
