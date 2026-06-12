@@ -32,6 +32,7 @@
                 <tr class="bg-accent/50 dark:bg-gray-700/30">
                     <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide w-12">No</th>
                     <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Nama Kategori</th>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Tipe Layanan</th>
                     <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Jumlah Produk</th>
                     <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Dibuat</th>
                     <th class="text-center px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide w-28">Aksi</th>
@@ -48,6 +49,21 @@
                                 </div>
                                 <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ $item->nama_kategori }}</span>
                             </div>
+                        </td>
+                        <td class="px-5 py-3">
+                            @if($item->tipe_layanan === 'Residential')
+                                <span class="bg-amber-100 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 text-xs px-2.5 py-1 rounded-full font-medium">
+                                    Residential
+                                </span>
+                            @elseif($item->tipe_layanan === 'Komersial')
+                                <span class="bg-purple-100 dark:bg-purple-950/40 text-purple-800 dark:text-purple-300 text-xs px-2.5 py-1 rounded-full font-medium">
+                                    Komersial
+                                </span>
+                            @else
+                                <span class="bg-blue-100 dark:bg-blue-950/40 text-blue-800 dark:text-blue-300 text-xs px-2.5 py-1 rounded-full font-medium">
+                                    Kustom
+                                </span>
+                            @endif
                         </td>
                         <td class="px-5 py-3">
                             <span class="bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-300 text-xs px-2.5 py-1 rounded-full font-medium">

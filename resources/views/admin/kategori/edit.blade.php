@@ -31,6 +31,21 @@
                 @enderror
             </div>
 
+            <div class="mb-5">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Tipe Layanan <span class="text-red-500">*</span>
+                </label>
+                <select name="tipe_layanan" 
+                    class="w-full px-4 py-3 border-2 rounded-xl text-sm text-gray-700 dark:text-gray-200 dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:border-primary transition-colors @error('tipe_layanan') border-red-400 @else border-gray-200 @enderror">
+                    <option value="Residential" {{ old('tipe_layanan', $kategori->tipe_layanan) === 'Residential' ? 'selected' : '' }}>Residential (Hunian)</option>
+                    <option value="Komersial" {{ old('tipe_layanan', $kategori->tipe_layanan) === 'Komersial' ? 'selected' : '' }}>Komersial (Bisnis/Kantor)</option>
+                    <option value="Kustom" {{ old('tipe_layanan', $kategori->tipe_layanan) === 'Kustom' ? 'selected' : '' }}>Kustom (Custom Furniture)</option>
+                </select>
+                @error('tipe_layanan')
+                    <p class="text-red-500 text-xs mt-1"><i data-lucide="alert-triangle" class="w-4 h-4 mr-1"></i>{{ $message }}</p>
+                @enderror
+            </div>
+
             <div class="flex items-center gap-3">
                 <button type="submit"
                     class="flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-5 py-2.5 rounded-xl text-sm font-medium transition-colors shadow-sm">

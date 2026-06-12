@@ -45,7 +45,7 @@ class LandingPageController extends Controller
             'jam_kerja' => $kontak->jam_kerja,
         ];
 
-        $categories = KategoriInterior::select('id', 'nama_kategori')->get();
+        $categories = KategoriInterior::select('id', 'nama_kategori', 'tipe_layanan')->get();
 
         $products = InteriorProduk::with('kategori')
             ->get()

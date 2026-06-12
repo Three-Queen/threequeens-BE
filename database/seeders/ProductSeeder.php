@@ -14,17 +14,27 @@ class ProductSeeder extends Seeder
         // Seed Categories
         // =========================================
         $categories = [
-            ['id' => 1, 'nama_kategori' => 'Kitchen Set'],
-            ['id' => 2, 'nama_kategori' => 'Living Room'],
-            ['id' => 3, 'nama_kategori' => 'Bedroom'],
-            ['id' => 4, 'nama_kategori' => 'Office'],
-            ['id' => 5, 'nama_kategori' => 'Bathroom'],
+            // Residential
+            ['id' => 1, 'nama_kategori' => 'Kitchen Set', 'tipe_layanan' => 'Residential'],
+            ['id' => 2, 'nama_kategori' => 'Living Room', 'tipe_layanan' => 'Residential'],
+            ['id' => 3, 'nama_kategori' => 'Bedroom', 'tipe_layanan' => 'Residential'],
+            ['id' => 5, 'nama_kategori' => 'Bathroom', 'tipe_layanan' => 'Residential'],
+            // Komersial
+            ['id' => 4, 'nama_kategori' => 'Office', 'tipe_layanan' => 'Komersial'],
+            ['id' => 6, 'nama_kategori' => 'Cafe & Restaurant', 'tipe_layanan' => 'Komersial'],
+            ['id' => 7, 'nama_kategori' => 'Retail & Store', 'tipe_layanan' => 'Komersial'],
+            // Kustom
+            ['id' => 8, 'nama_kategori' => 'Custom Cabinet', 'tipe_layanan' => 'Kustom'],
+            ['id' => 9, 'nama_kategori' => 'Custom Wardrobe', 'tipe_layanan' => 'Kustom'],
         ];
 
         foreach ($categories as $cat) {
             KategoriInterior::updateOrCreate(
                 ['id' => $cat['id']],
-                ['nama_kategori' => $cat['nama_kategori']]
+                [
+                    'nama_kategori' => $cat['nama_kategori'],
+                    'tipe_layanan' => $cat['tipe_layanan'],
+                ]
             );
         }
 
@@ -128,7 +138,7 @@ class ProductSeeder extends Seeder
                 'kategori_id' => 3,
             ],
 
-            // --- Office (Kategori ID: 4) ---
+            // --- Office / Komersial (Kategori ID: 4) ---
             [
                 'nama_produk' => 'Meja Kerja Direktur Premium',
                 'deskripsi_produk' => 'Meja kerja direktur berbahan dasar kayu jati solid berlapis melamine doff dengan tempat kabel terintegrasi dan laci berkeamanan sidik jari.',
@@ -181,15 +191,63 @@ class ProductSeeder extends Seeder
                 'pengerjaan_produk' => 'Estimasi pengerjaan 5-7 hari kerja.',
                 'kategori_id' => 5,
             ],
+
+            // --- Cafe & Restaurant (Kategori ID: 6) ---
             [
-                'nama_produk' => 'Lemari Gantung Kamar Mandi',
-                'deskripsi_produk' => 'Lemari gantung minimalis bertingkat untuk menyimpan handuk bersih dan sabun, dilengkapi pintu cermin kaca buram.',
-                'harga_produk' => 1200000.00,
+                'nama_produk' => 'Meja Cafe Industrial Jati',
+                'deskripsi_produk' => 'Meja makan cafe bergaya industrial dengan permukaan kayu jati solid daur ulang yang bertekstur estetis dan kaki besi hollow berlapis powder coating hitam.',
+                'harga_produk' => 3200000.00,
                 'gambar_produk' => 'gambar1.png',
+                'desain_produk_3d' => 'produk/3d/ACC7dtDyQ8yMdfnh98ElWJ3QrICGk5JTWcfpXLDO.glb',
+                'desain_produk_2d' => 'produk/2d/3Y7lBEyzHxyrPIw5VhoF7kQfj78l9Zb0HMjEPr9C.png',
+                'pengerjaan_produk' => 'Estimasi pengerjaan 10-14 hari kerja untuk pemesanan massal/unit.',
+                'kategori_id' => 6,
+            ],
+            [
+                'nama_produk' => 'Kursi Bar Stool Besi Kayu',
+                'deskripsi_produk' => 'Kursi tinggi bar stool tanpa sandaran dengan dudukan kayu jati bulat dan rangka besi tempa kaki penyangga yang kokoh.',
+                'harga_produk' => 850000.00,
+                'gambar_produk' => 'gambar2.png',
                 'desain_produk_3d' => null,
                 'desain_produk_2d' => null,
-                'pengerjaan_produk' => 'Estimasi pengerjaan 5-7 hari kerja.',
-                'kategori_id' => 5,
+                'pengerjaan_produk' => 'Ready stock / custom warna cat besi 5 hari kerja.',
+                'kategori_id' => 6,
+            ],
+
+            // --- Retail & Store (Kategori ID: 7) ---
+            [
+                'nama_produk' => 'Rak Display Boutique Gantung',
+                'deskripsi_produk' => 'Rak display gantung untuk butik pakaian dengan perpaduan kayu laminasi putih bersih dan pipa besi gold antik, memberikan kesan butik yang elegan.',
+                'harga_produk' => 5800000.00,
+                'gambar_produk' => 'gambar3.png',
+                'desain_produk_3d' => 'produk/3d/9SGVZFDNJJAbvrw68kSUcBjTWqdNHebZXBvlcHCN.glb',
+                'desain_produk_2d' => 'produk/2d/HfGBA2atke21Wn8gC0HNn66mluyEQZEVVjEZesva.jpeg',
+                'pengerjaan_produk' => 'Estimasi pengerjaan 10-15 hari kerja.',
+                'kategori_id' => 7,
+            ],
+
+            // --- Custom Cabinet (Kategori ID: 8) ---
+            [
+                'nama_produk' => 'Credenza TV Custom HPL Wood',
+                'deskripsi_produk' => 'Credenza TV gantung pesanan khusus dengan sekat konsol game, pintu tekan magnetik (push-to-open), dan dilapisi HPL serat kayu alami.',
+                'harga_produk' => 4500000.00,
+                'gambar_produk' => 'gambar1.png',
+                'desain_produk_3d' => null,
+                'desain_produk_2d' => 'produk/2d/HfGBA2atke21Wn8gC0HNn66mluyEQZEVVjEZesva.jpeg',
+                'pengerjaan_produk' => 'Estimasi pengerjaan 7-10 hari kerja.',
+                'kategori_id' => 8,
+            ],
+
+            // --- Custom Wardrobe (Kategori ID: 9) ---
+            [
+                'nama_produk' => 'Walk-In Closet L-Shape Luxury',
+                'deskripsi_produk' => 'Lemari pakaian gantung tanpa pintu (walk-in closet) dengan konstruksi modular, laci khusus jam tangan berlapis beludru, dan pencahayaan sensor otomatis.',
+                'harga_produk' => 19500000.00,
+                'gambar_produk' => 'gambar3.png',
+                'desain_produk_3d' => 'produk/3d/ACC7dtDyQ8yMdfnh98ElWJ3QrICGk5JTWcfpXLDO.glb',
+                'desain_produk_2d' => 'produk/2d/3Y7lBEyzHxyrPIw5VhoF7kQfj78l9Zb0HMjEPr9C.png',
+                'pengerjaan_produk' => 'Estimasi pengerjaan 14-25 hari kerja bergantung pada kompleksitas layout ruangan klien.',
+                'kategori_id' => 9,
             ],
         ];
 

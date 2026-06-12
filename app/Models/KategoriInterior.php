@@ -14,6 +14,7 @@ class KategoriInterior extends Model
 
     protected $fillable = [
         'nama_kategori',
+        'tipe_layanan',
     ];
 
     public function produk(): HasMany
