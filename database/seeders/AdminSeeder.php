@@ -66,40 +66,76 @@ class AdminSeeder extends Seeder
         // =========================================
         $portfolios = [
             [
-                'nama_proyek' => 'Appartemen Studio - Winduhaji',
+                'nama_proyek' => 'Apartemen Studio Modern - Winduhaji',
                 'lokasi' => 'Kuningan - 2026',
                 'dokumentasi_proyek' => 'gambar3.png',
                 'deskripsi' => 'Desain interior apartemen studio yang efisien dengan pemanfaatan ruang vertikal secara maksimal, bernuansa kayu hangat dan pencahayaan dramatis.',
             ],
             [
-                'nama_proyek' => 'Appartemen Studio - Winduhaji',
+                'nama_proyek' => 'Kitchen Set L - Shape Premium - Kuningan',
                 'lokasi' => 'Kuningan - 2026',
                 'dokumentasi_proyek' => 'gambar1.png',
-                'deskripsi' => 'Konsep tata ruang apartemen dengan furniture multifungsi terintegrasi untuk menciptakan kesan luas pada area terbatas.',
-            ],
-            [
-                'nama_proyek' => 'Appartemen Studio Band - Winduhaji',
-                'lokasi' => 'Kuningan - 2026',
-                'dokumentasi_proyek' => 'gambar2.png',
-                'deskripsi' => 'Studio latihan musik pribadi bernuansa akustik premium dengan penataan kedap suara dan pencahayaan panggung minimalis.',
-            ],
-            [
-                'nama_proyek' => 'Kitchen Set L - Shape Premium',
-                'lokasi' => 'Kuningan - 2026',
-                'dokumentasi_proyek' => 'gambar3.png',
                 'deskripsi' => 'Kitchen set minimalis bentuk L dengan island table berlapis kuarsa putih mewah dan kabinet bertekstur kayu alami.',
             ],
             [
-                'nama_proyek' => 'Kitchen Set L - Shape Premium',
-                'lokasi' => 'Kuningan - 2026',
-                'dokumentasi_proyek' => 'gambar1.png',
-                'deskripsi' => 'Kitchen set modern berteknologi soft-close dengan ruang penyimpanan luas untuk memaksimalkan fungsionalitas dapur.',
+                'nama_proyek' => 'Master Bedroom Scandinavian - Cirebon',
+                'lokasi' => 'Cirebon - 2026',
+                'dokumentasi_proyek' => 'gambar2.png',
+                'deskripsi' => 'Desain kamar tidur utama bernuansa Scandinavian dengan paduan warna netral, kabinet wardrobe terintegrasi, dan headboard berbahan fabric lembut.',
             ],
             [
-                'nama_proyek' => 'Kitchen Set L - Shape Premium',
+                'nama_proyek' => 'Luxury Bathroom Marble - Bandung',
+                'lokasi' => 'Bandung - 2025',
+                'dokumentasi_proyek' => 'gambar3.png',
+                'deskripsi' => 'Interior kamar mandi mewah yang dibalut dinding marmer Carrara, cermin LED pintar, dan saniter bernuansa hitam matte.',
+            ],
+            [
+                'nama_proyek' => 'Office Space Startup - Jakarta',
+                'lokasi' => 'Jakarta - 2026',
+                'dokumentasi_proyek' => 'gambar1.png',
+                'deskripsi' => 'Ruang kantor kerja bersama dengan konsep open-space, dipadukan dengan tanaman indoor dan ruang meeting kedap suara untuk produktivitas maksimal.',
+            ],
+            [
+                'nama_proyek' => 'Coffee Shop Industrial - Kuningan',
+                'lokasi' => 'Kuningan - 2025',
+                'dokumentasi_proyek' => 'gambar2.png',
+                'deskripsi' => 'Desain cafe kopi industrial menggunakan ekspos bata merah, semen poles, furniture besi kustom, dan lampu gantung edison yang estetik.',
+            ],
+            [
+                'nama_proyek' => 'Butik Fashion Minimalis - Cirebon',
+                'lokasi' => 'Cirebon - 2026',
+                'dokumentasi_proyek' => 'gambar3.png',
+                'deskripsi' => 'Tata ruang butik pakaian premium dengan sistem gantungan kustom minimalis hitam, pencahayaan spotlight presisi, dan fitting room bergaya estetik.',
+            ],
+            [
+                'nama_proyek' => 'Custom TV Cabinet - Winduhaji',
+                'lokasi' => 'Kuningan - 2026',
+                'dokumentasi_proyek' => 'gambar1.png',
+                'deskripsi' => 'Pengerjaan furniture custom kabinet TV minimalis melayang dengan panel kisi-kisi kayu di bagian belakang dan lampu LED strip tersembunyi.',
+            ],
+            [
+                'nama_proyek' => 'Custom Wardrobe Walk-in Closet',
                 'lokasi' => 'Kuningan - 2026',
                 'dokumentasi_proyek' => 'gambar2.png',
-                'deskripsi' => 'Kitchen set elegan bernuansa monokromatik abu-abu gelap dengan backsplash marmer dan pencahayaan strip LED tersembunyi.',
+                'deskripsi' => 'Pembuatan lemari pakaian custom pintu kaca tempered dengan frame aluminium hitam gelap dan pencahayaan interior LED otomatis.',
+            ],
+            [
+                'nama_proyek' => 'Living Room Cozy - Kuningan',
+                'lokasi' => 'Kuningan - 2025',
+                'dokumentasi_proyek' => 'gambar3.png',
+                'deskripsi' => 'Desain ruang keluarga hangat dengan sofa modular abu-abu besar, karpet rajut, dan dekorasi dinding rak kustom multifungsi.',
+            ],
+            [
+                'nama_proyek' => 'Dapur Kitchen Set HPL - Cirebon',
+                'lokasi' => 'Cirebon - 2026',
+                'dokumentasi_proyek' => 'gambar1.png',
+                'deskripsi' => 'Kitchen set kompak untuk rumah minimalis dengan finishing HPL motif serat kayu gelap dan anti-fingerprint.',
+            ],
+            [
+                'nama_proyek' => 'Kantor Kerja Eksekutif - Bandung',
+                'lokasi' => 'Bandung - 2026',
+                'dokumentasi_proyek' => 'gambar2.png',
+                'deskripsi' => 'Desain meja kerja direksi custom berpola marmer, kursi ergonomis premium, dan rak berkas minimalis fungsional.',
             ],
         ];
 
