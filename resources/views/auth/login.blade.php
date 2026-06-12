@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ asset('logo.png') }}">
     <title>Login - Three Queens Interior Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,10 +12,10 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#6F4E37',
-                        'primary-dark': '#5a3d2b',
-                        'primary-light': '#8B6347',
-                        secondary: '#A67B5B',
+                        primary: '#472404',
+                        'primary-dark': '#341a02',
+                        'primary-light': '#6b3a0e',
+                        secondary: '#8B5E3C',
                         accent: '#F5F0E6',
                     }
                 }
@@ -40,7 +41,7 @@
             
             {{-- Kiri: Logo & Brand Info --}}
             <div class="bg-white border-b md:border-b-0 md:border-r border-gray-100 p-8 md:p-10 flex flex-col justify-center items-center md:items-start text-center md:text-left md:w-5/12">
-                <img src="{{ asset('logo.png') }}" alt="Three Queens Logo" class="w-40 mb-2 mix-blend-multiply object-contain">
+                <img src="{{ asset('logo.png') }}" alt="Three Queens Logo" class="w-64 mb-2 mix-blend-multiply object-contain">
                 <p class="text-gray-500 text-sm leading-relaxed max-w-xs mt-1">
                     Masuk ke panel administrasi untuk mengelola portofolio, produk interior, dan pengaturan website.
                 </p>
@@ -119,7 +120,7 @@
                         @enderror
                     </div>
 
-                    {{-- Remember Me --}}
+                    {{-- Remember Me & Forgot Password --}}
                     <div class="flex items-center justify-between mb-6">
                         <div class="flex items-center">
                             <input type="checkbox" name="remember" id="remember"
@@ -128,6 +129,9 @@
                                 Ingat saya
                             </label>
                         </div>
+                        <a href="{{ route('password.request') }}" class="text-sm text-primary hover:underline transition-colors">
+                            Lupa password?
+                        </a>
                     </div>
 
                     {{-- Submit --}}
@@ -139,9 +143,8 @@
                 </form>
 
                 <div class="mt-6 pt-5 border-t border-gray-100">
-                    <p class="text-left text-xs text-gray-400 flex items-center justify-between">
-                        <span>&copy; {{ date('Y') }} Three Queens Interior</span>
-                        <a href="#" class="hover:text-primary transition-colors">Bantuan</a>
+                    <p class="text-left text-xs text-gray-400">
+                        &copy; {{ date('Y') }} Three Queens Interior
                     </p>
                 </div>
             </div>

@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/png" href="{{ asset('logo.png') }}">
     <title>@yield('title', 'Dashboard') - Three Queens Interior Admin</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,10 +17,10 @@
             theme: {
                 extend: {
                     colors: {
-                        primary:        '#6F4E37',
-                        'primary-dark': '#5a3d2b',
-                        'primary-light':'#8B6347',
-                        secondary:      '#A67B5B',
+                        primary:        '#472404',
+                        'primary-dark': '#341a02',
+                        'primary-light':'#6b3a0e',
+                        secondary:      '#8B5E3C',
                         accent:         '#F5F0E6',
                     },
                     fontFamily: {
@@ -62,16 +63,16 @@
         /* Scrollbar */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #A67B5B; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #6F4E37; }
+        ::-webkit-scrollbar-thumb { background: #6b3a0e; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #472404; }
 
         /* Sidebar transition */
         .sidebar-transition { transition: width 0.3s ease, transform 0.3s ease; }
 
         /* Active menu glow */
         .menu-active {
-            background: linear-gradient(135deg, #6F4E37, #A67B5B);
-            box-shadow: 0 4px 15px rgba(111,78,55,0.4);
+            background: linear-gradient(135deg, #472404, #6b3a0e);
+            box-shadow: 0 4px 15px rgba(71,36,4,0.4);
         }
 
         /* Card hover */
@@ -92,7 +93,7 @@
 
         /* Table row hover */
         tbody tr:hover { background-color: rgba(245,240,230,0.5); }
-        .dark tbody tr:hover { background-color: rgba(111,78,55,0.2); }
+        .dark tbody tr:hover { background-color: rgba(71,36,4,0.2); }
     </style>
 
     @stack('styles')
@@ -223,7 +224,7 @@ function confirmDelete(formId, itemName = 'item ini') {
         text: `Anda yakin ingin menghapus ${itemName}? Tindakan ini tidak dapat dibatalkan.`,
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#6F4E37',
+        confirmButtonColor: '#472404',
         cancelButtonColor: '#6b7280',
         confirmButtonText: 'Ya, Hapus!',
         cancelButtonText: 'Batal',

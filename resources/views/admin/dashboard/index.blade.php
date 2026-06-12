@@ -210,8 +210,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const data   = @json($chartData->pluck('count'));
 
     const colors = [
-        '#6F4E37', '#A67B5B', '#C4956A', '#D4A574', '#E8C9A3',
-        '#8B5E3C', '#B8946E', '#9E7A5A', '#7D5A42', '#F0DFC4'
+        '#472404', '#6b3a0e', '#8B5E3C', '#a3723d', '#C4956A',
+        '#341a02', '#7d4820', '#9E7A5A', '#5a3010', '#d4a574'
     ];
 
     new Chart(ctx, {
@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function() {
             plugins: {
                 legend: { display: false },
                 tooltip: {
-                    backgroundColor: '#6F4E37',
+                    backgroundColor: '#472404',
                     titleColor: '#F5F0E6',
                     bodyColor: '#F5F0E6',
                     padding: 12,

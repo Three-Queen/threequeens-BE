@@ -14,6 +14,8 @@ class ManajemenTentang extends Model
     protected $fillable = [
         'title',
         'deskripsi',
+        'visi',
+        'misi',
         'gambar1',
         'gambar2',
     ];
@@ -31,8 +33,10 @@ class ManajemenTentang extends Model
     public static function getData(): self
     {
         return static::firstOrCreate(['id' => 1], [
-            'title' => 'Tentang Three Queen Interior',
+            'title' => 'Tentang Three Queens Interior',
             'deskripsi' => 'Kami adalah perusahaan desain interior terpercaya.',
+            'visi' => 'Menjadi perusahaan interior dan furniture custom terpercaya yang menghadirkan solusi ruang berkualitas, inovatif, dan bernilai estetika tinggi.',
+            'misi' => "• Memberikan layanan terbaik kepada setiap pelanggan.\n• Menghasilkan produk interior dan furniture yang berkualitas.\n• Mengutamakan kepuasan pelanggan dalam setiap proyek.\n• Mengembangkan desain yang inovatif dan fungsional.\n• Menjaga profesionalisme dan integritas dalam setiap pekerjaan."
         ]);
     }
 }

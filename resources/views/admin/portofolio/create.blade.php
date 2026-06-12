@@ -48,6 +48,14 @@
             </div>
 
             <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Deskripsi Proyek</label>
+                <textarea name="deskripsi" rows="4"
+                    placeholder="Ceritakan detail proyek, konsep desain, material yang digunakan, dsb..."
+                    class="w-full px-4 py-3 border-2 rounded-xl text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 focus:outline-none focus:border-primary transition-colors border-gray-200 resize-none">{{ old('deskripsi') }}</textarea>
+                @error('deskripsi') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+            </div>
+
+            <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Link Google Maps</label>
                 <input type="text" name="lokasi_google_maps" value="{{ old('lokasi_google_maps') }}"
                     placeholder="https://maps.google.com/..."

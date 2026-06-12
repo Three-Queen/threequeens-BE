@@ -49,6 +49,13 @@
                 @endif
             </div>
 
+            @if($portofolio->deskripsi)
+                <div class="mb-5">
+                    <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Deskripsi Proyek</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-line">{{ $portofolio->deskripsi }}</p>
+                </div>
+            @endif
+
             @if($portofolio->lokasi_google_maps)
                 <div class="mb-5">
                     <a href="{{ $portofolio->lokasi_google_maps }}" target="_blank"

@@ -28,6 +28,8 @@ class LandingPageController extends Controller
         $tentangData = [
             'title' => $tentang->title,
             'deskripsi' => $tentang->deskripsi,
+            'visi' => $tentang->visi,
+            'misi' => $tentang->misi,
             'gambar1' => $tentang->gambar1_url,
             'gambar2' => $tentang->gambar2_url,
         ];

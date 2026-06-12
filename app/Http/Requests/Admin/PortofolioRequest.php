@@ -15,10 +15,11 @@ class PortofolioRequest extends FormRequest
     {
         return [
             'nama_proyek'        => ['required', 'string', 'max:255'],
+            'deskripsi'          => ['nullable', 'string'],
             'lokasi'             => ['required', 'string', 'max:255'],
             'lokasi_google_maps' => ['nullable', 'string', 'max:500'],
             'dokumentasi_proyek' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:10240'],
-            'waktu_proyek'       => ['nullable', 'string', 'max:100'],
+            'waktu_proyek'       => ['nullable', 'date', 'max:100'],
         ];
     }
 

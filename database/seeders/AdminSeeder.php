@@ -45,6 +45,8 @@ class AdminSeeder extends Seeder
         ManajemenTentang::updateOrCreate(['id' => 1], [
             'title'     => 'Kami Menciptakan Ruangan Impian Anda!',
             'deskripsi' => "Three Queens adalah perusahaan furniture custom dan desain interior yang berdiri sejak 2019. Kami berkomitmen menghadirkan solusi desain yang memadukan estetika dan fungsionalitas untuk setiap ruang yang kami kerjakan.\n\nDengan pengalaman lebih dari 5 tahun dan ratusan proyek yang telah selesai, kami memahami bahwa setiap klien memiliki kebutuhan yang unik. Oleh karena itu, kami menawarkan layanan fully custom dari tahap konsultasi hingga instalasi.",
+            'visi'      => 'Menjadi perusahaan interior dan furniture custom terpercaya yang menghadirkan solusi ruang berkualitas, inovatif, dan bernilai estetika tinggi.',
+            'misi'      => "• Memberikan layanan terbaik kepada setiap pelanggan.\n• Menghasilkan produk interior dan furniture yang berkualitas.\n• Mengutamakan kepuasan pelanggan dalam setiap proyek.\n• Mengembangkan desain yang inovatif dan fungsional.\n• Menjaga profesionalisme dan integritas dalam setiap pekerjaan.",
             'gambar1'   => 'gambar1.png',
             'gambar2'   => 'gambar2.png',
         ]);

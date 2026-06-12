@@ -16,6 +16,8 @@ class TentangRequest extends FormRequest
         return [
             'title'     => ['required', 'string', 'max:255'],
             'deskripsi' => ['nullable', 'string'],
+            'visi'      => ['nullable', 'string'],
+            'misi'      => ['nullable', 'string'],
             'gambar1'   => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:5120'],
             'gambar2'   => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:5120'],
         ];
