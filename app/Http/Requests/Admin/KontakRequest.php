@@ -14,11 +14,11 @@ class KontakRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'lokasi'    => ['nullable', 'string'],
-            'whatsapp'  => ['nullable', 'string', 'max:20'],
-            'email'     => ['nullable', 'email', 'max:255'],
-            'facebook'  => ['nullable', 'string', 'max:255'],
-            'tiktok'    => ['nullable', 'string', 'max:255'],
+            'lokasi' => ['nullable', 'string'],
+            'whatsapp' => ['nullable', 'string', 'max:20'],
+            'email' => ['nullable', 'email', 'max:255'],
+            'facebook' => ['nullable', 'string', 'max:255'],
+            'tiktok' => ['nullable', 'string', 'max:255'],
             'instagram' => ['nullable', 'string', 'max:255'],
             'jam_kerja' => ['nullable', 'string', 'max:255'],
         ];

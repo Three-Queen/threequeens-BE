@@ -20,6 +20,7 @@ class PesanMasuk extends Model
     ];
 
     const STATUS_BELUM = 'belum_dibaca';
+
     const STATUS_SUDAH = 'sudah_dibaca';
 
     public function scopeBelumDibaca($query)

@@ -14,6 +14,7 @@ class TentangController extends Controller
     public function edit(): View
     {
         $tentang = ManajemenTentang::getData();
+
         return view('admin.tentang.edit', compact('tentang'));
     }
 

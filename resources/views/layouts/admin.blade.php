@@ -35,6 +35,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@7.3.0/dist/turbo.es2017-umd.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -157,34 +158,30 @@
 {{-- ===== SWEETALERT FLASH ===== --}}
 @if(session('success'))
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        Swal.fire({
-            icon: 'success',
-            title: 'Berhasil!',
-            text: '{{ session('success') }}',
-            timer: 3000,
-            timerProgressBar: true,
-            showConfirmButton: false,
-            toast: true,
-            position: 'top-end',
-        });
+    Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: '{{ session('success') }}',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        toast: true,
+        position: 'top-end',
     });
 </script>
 @endif
 
 @if(session('error'))
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        Swal.fire({
-            icon: 'error',
-            title: 'Gagal!',
-            text: '{{ session('error') }}',
-            timer: 4000,
-            timerProgressBar: true,
-            showConfirmButton: false,
-            toast: true,
-            position: 'top-end',
-        });
+    Swal.fire({
+        icon: 'error',
+        title: 'Gagal!',
+        text: '{{ session('error') }}',
+        timer: 4000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        toast: true,
+        position: 'top-end',
     });
 </script>
 @endif
@@ -238,15 +235,14 @@ function confirmDelete(formId, itemName = 'item ini') {
 </script>
 
 <script>
-    // Jalankan sekali saat DOM siap
-    document.addEventListener('DOMContentLoaded', function () {
+    // Jalankan sekali saat DOM siap atau via Turbo load
+    const initLucide = () => {
         lucide.createIcons();
-    });
-    // Jalankan lagi setelah Alpine.js selesai inisialisasi
-    // (menangani icon di dalam x-show / x-cloak)
-    document.addEventListener('alpine:initialized', function () {
-        lucide.createIcons();
-    });
+    };
+    
+    document.addEventListener('DOMContentLoaded', initLucide);
+    document.addEventListener('turbo:load', initLucide);
+    document.addEventListener('alpine:initialized', initLucide);
 </script>
 
 @stack('scripts')

@@ -22,6 +22,6 @@ class PortofolioProyek extends Model
 
     public function getDokumentasiUrlAttribute(): ?string
     {
-        return $this->dokumentasi_proyek ? asset('storage/' . $this->dokumentasi_proyek) : null;
+        return $this->dokumentasi_proyek ? asset('storage/'.$this->dokumentasi_proyek) : null;
     }
 }

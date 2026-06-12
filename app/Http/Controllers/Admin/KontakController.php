@@ -13,6 +13,7 @@ class KontakController extends Controller
     public function edit(): View
     {
         $kontak = ManajemenKontak::getData();
+
         return view('admin.kontak.edit', compact('kontak'));
     }
 

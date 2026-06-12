@@ -163,7 +163,7 @@
                 <p class="text-white text-sm font-medium truncate">{{ Auth::user()->name }}</p>
                 <p class="text-amber-200 text-xs truncate">Admin</p>
             </div>
-            <form method="POST" action="{{ route('logout') }}" :class="(sidebarOpen || isMobile) ? 'block' : 'hidden'">
+            <form method="POST" action="{{ route('logout') }}" data-turbo="false" :class="(sidebarOpen || isMobile) ? 'block' : 'hidden'">
                 @csrf
                 <button type="submit"
                     class="text-white/60 hover:text-red-400 transition-colors p-1 rounded-lg hover:bg-white/10"

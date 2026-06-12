@@ -20,7 +20,7 @@
         <div class="lg:col-span-2 space-y-5">
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5">
                 <h3 class="font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
-                    <i data-lucide="pencil" class="w-4 h-4 text-primary"></i> Edit Informasi Produk
+                    <i data-lucide="pencil" class="w-4 h-4 text-primary dark:text-amber-200"></i> Edit Informasi Produk
                 </h3>
 
                 <div class="mb-4">
@@ -74,7 +74,7 @@
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5"
                  x-data="{ previewUrl: '{{ $produk->gambar_url }}', fileName: '' }">
                 <h3 class="font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
-                    <i data-lucide="image" class="w-4 h-4 text-primary"></i> Gambar Produk
+                    <i data-lucide="image" class="w-4 h-4 text-primary dark:text-amber-200"></i> Gambar Produk
                 </h3>
                 <div class="border-2 border-dashed border-gray-200 dark:border-gray-600 rounded-xl p-4 text-center cursor-pointer hover:border-primary transition-colors"
                      @click="$refs.gInput.click()">
@@ -98,9 +98,9 @@
                 </h3>
                 @if($produk->desain_produk_2d)
                     <div class="flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-2 mb-2">
-                        <i data-lucide="file-text" class="w-4 h-4 text-blue-500"></i>
-                        <span class="text-xs text-blue-600 truncate">{{ basename($produk->desain_produk_2d) }}</span>
-                        <a href="{{ $produk->desain2d_url }}" target="_blank" class="ml-auto text-xs text-blue-500 hover:underline">Lihat</a>
+                        <i data-lucide="file-text" class="w-4 h-4 text-blue-500 dark:text-blue-400"></i>
+                        <span class="text-xs text-blue-600 dark:text-blue-300 truncate">{{ basename($produk->desain_produk_2d) }}</span>
+                        <a href="{{ $produk->desain2d_url }}" target="_blank" class="ml-auto text-xs text-blue-500 dark:text-blue-400 hover:underline">Lihat</a>
                     </div>
                 @endif
                 <div class="border-2 border-dashed border-gray-200 dark:border-gray-600 rounded-xl p-3 text-center cursor-pointer hover:border-blue-400 transition-colors"
@@ -120,9 +120,9 @@
                 </h3>
                 @if($produk->desain_produk_3d)
                     <div class="flex items-center gap-2 bg-purple-50 dark:bg-purple-900/20 rounded-lg p-2 mb-2">
-                        <i data-lucide="box" class="w-4 h-4 text-purple-500"></i>
-                        <span class="text-xs text-purple-600 truncate">{{ basename($produk->desain_produk_3d) }}</span>
-                        <a href="{{ $produk->desain3d_url }}" target="_blank" class="ml-auto text-xs text-purple-500 hover:underline">Lihat</a>
+                        <i data-lucide="box" class="w-4 h-4 text-purple-500 dark:text-purple-400"></i>
+                        <span class="text-xs text-purple-600 dark:text-purple-300 truncate">{{ basename($produk->desain_produk_3d) }}</span>
+                        <a href="{{ $produk->desain3d_url }}" target="_blank" class="ml-auto text-xs text-purple-500 dark:text-purple-400 hover:underline">Lihat</a>
                     </div>
                 @endif
                 <div class="border-2 border-dashed border-gray-200 dark:border-gray-600 rounded-xl p-3 text-center cursor-pointer hover:border-purple-400 transition-colors"

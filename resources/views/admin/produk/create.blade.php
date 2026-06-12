@@ -22,7 +22,7 @@
             {{-- Info Utama --}}
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5">
                 <h3 class="font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
-                    <i data-lucide="info" class="w-4 h-4 text-primary"></i> Informasi Produk
+                    <i data-lucide="info" class="w-4 h-4 text-primary dark:text-amber-200"></i> Informasi Produk
                 </h3>
 
                 <div class="mb-4">
@@ -89,7 +89,7 @@
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5"
                  x-data="imagePreview()">
                 <h3 class="font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
-                    <i data-lucide="image" class="w-4 h-4 text-primary"></i> Gambar Produk
+                    <i data-lucide="image" class="w-4 h-4 text-primary dark:text-amber-200"></i> Gambar Produk
                 </h3>
 
                 <div class="border-2 border-dashed border-gray-200 dark:border-gray-600 rounded-xl p-4 text-center cursor-pointer hover:border-primary transition-colors"

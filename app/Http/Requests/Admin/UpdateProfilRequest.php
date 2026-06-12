@@ -16,8 +16,8 @@ class UpdateProfilRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'   => ['required', 'string', 'max:255'],
-            'email'  => ['required', 'email', 'max:255', Rule::unique('users')->ignore(Auth::id())],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore(Auth::id())],
             'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
         ];
     }
@@ -25,12 +25,12 @@ class UpdateProfilRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required'  => 'Nama wajib diisi.',
+            'name.required' => 'Nama wajib diisi.',
             'email.required' => 'Email wajib diisi.',
-            'email.email'    => 'Format email tidak valid.',
-            'email.unique'   => 'Email sudah digunakan.',
-            'avatar.image'   => 'Avatar harus berupa gambar.',
-            'avatar.max'     => 'Ukuran avatar maksimal 2 MB.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah digunakan.',
+            'avatar.image' => 'Avatar harus berupa gambar.',
+            'avatar.max' => 'Ukuran avatar maksimal 2 MB.',
         ];
     }
 }

@@ -22,10 +22,10 @@ class UpdatePasswordRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'password_lama.required'      => 'Password lama wajib diisi.',
-            'password_baru.required'      => 'Password baru wajib diisi.',
-            'password_baru.min'           => 'Password baru minimal 8 karakter.',
-            'password_baru.confirmed'     => 'Konfirmasi password tidak sesuai.',
+            'password_lama.required' => 'Password lama wajib diisi.',
+            'password_baru.required' => 'Password baru wajib diisi.',
+            'password_baru.min' => 'Password baru minimal 8 karakter.',
+            'password_baru.confirmed' => 'Konfirmasi password tidak sesuai.',
         ];
     }
 }

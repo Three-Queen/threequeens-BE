@@ -18,7 +18,7 @@
     <div class="stat-card bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-sm border border-gray-100 dark:border-gray-700">
         <div class="flex items-center justify-between mb-3">
             <div class="w-11 h-11 bg-amber-50 dark:bg-amber-900/20 rounded-xl flex items-center justify-center">
-                <i data-lucide="sofa" class="w-5 h-5 text-amber-600"></i>
+                <i data-lucide="sofa" class="w-5 h-5 text-amber-600 dark:text-amber-400"></i>
             </div>
             <span class="text-xs text-gray-400 bg-gray-50 dark:bg-gray-700 px-2 py-1 rounded-full">Produk</span>
         </div>
@@ -29,8 +29,8 @@
     {{-- Total Kategori --}}
     <div class="stat-card bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-sm border border-gray-100 dark:border-gray-700">
         <div class="flex items-center justify-between mb-3">
-            <div class="w-11 h-11 bg-primary/10 rounded-xl flex items-center justify-center">
-                <i data-lucide="tag" class="w-5 h-5 text-primary"></i>
+            <div class="w-11 h-11 bg-primary/10 dark:bg-amber-900/20 rounded-xl flex items-center justify-center">
+                <i data-lucide="tag" class="w-5 h-5 text-primary dark:text-amber-200"></i>
             </div>
             <span class="text-xs text-gray-400 bg-gray-50 dark:bg-gray-700 px-2 py-1 rounded-full">Kategori</span>
         </div>
@@ -42,7 +42,7 @@
     <div class="stat-card bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-sm border border-gray-100 dark:border-gray-700">
         <div class="flex items-center justify-between mb-3">
             <div class="w-11 h-11 bg-blue-50 dark:bg-blue-900/20 rounded-xl flex items-center justify-center">
-                <i data-lucide="folder-open" class="w-5 h-5 text-blue-600"></i>
+                <i data-lucide="folder-open" class="w-5 h-5 text-blue-600 dark:text-blue-400"></i>
             </div>
             <span class="text-xs text-gray-400 bg-gray-50 dark:bg-gray-700 px-2 py-1 rounded-full">Proyek</span>
         </div>
@@ -54,7 +54,7 @@
     <div class="stat-card bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-sm border border-gray-100 dark:border-gray-700">
         <div class="flex items-center justify-between mb-3">
             <div class="w-11 h-11 bg-green-50 dark:bg-green-900/20 rounded-xl flex items-center justify-center">
-                <i data-lucide="mail" class="w-5 h-5 text-green-600"></i>
+                <i data-lucide="mail" class="w-5 h-5 text-green-600 dark:text-green-400"></i>
             </div>
             <span class="text-xs text-gray-400 bg-gray-50 dark:bg-gray-700 px-2 py-1 rounded-full">Pesan</span>
         </div>
@@ -85,8 +85,8 @@
                 <h3 class="font-semibold text-gray-800 dark:text-white">Produk per Kategori</h3>
                 <p class="text-xs text-gray-400 mt-0.5">Distribusi produk berdasarkan kategori</p>
             </div>
-            <div class="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
-                <i data-lucide="bar-chart-2" class="w-4 h-4 text-primary"></i>
+            <div class="w-8 h-8 bg-accent dark:bg-primary/20 rounded-lg flex items-center justify-center">
+                <i data-lucide="bar-chart-2" class="w-4 h-4 text-primary dark:text-amber-200"></i>
             </div>
         </div>
         <div class="relative h-64">
@@ -98,7 +98,7 @@
     <div class="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-sm border border-gray-100 dark:border-gray-700">
         <div class="flex items-center justify-between mb-4">
             <h3 class="font-semibold text-gray-800 dark:text-white">Pesan Terbaru</h3>
-            <a href="{{ route('admin.pesan.index') }}" class="text-xs text-primary hover:text-primary-dark transition-colors">
+            <a href="{{ route('admin.pesan.index') }}" class="text-xs text-primary hover:text-primary-dark dark:text-amber-400 dark:hover:text-amber-300 transition-colors">
                 Lihat semua →
             </a>
         </div>
@@ -107,8 +107,8 @@
             @forelse($pesanTerbaru as $pesan)
                 <a href="{{ route('admin.pesan.show', $pesan) }}"
                    class="flex items-start gap-3 p-3 rounded-xl hover:bg-accent dark:hover:bg-gray-700/50 transition-colors group">
-                    <div class="w-9 h-9 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <i data-lucide="user" class="w-3.5 h-3.5 text-primary"></i>
+                    <div class="w-9 h-9 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <i data-lucide="user" class="w-3.5 h-3.5 text-primary dark:text-amber-200"></i>
                     </div>
                     <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-2">
@@ -118,7 +118,7 @@
                             @endif
                         </div>
                         <p class="text-xs text-gray-500 dark:text-gray-400 truncate">{{ Str::limit($pesan->pesan, 45) }}</p>
-                        <p class="text-xs text-gray-300 dark:text-gray-600 mt-0.5">{{ $pesan->created_at->diffForHumans() }}</p>
+                        <p class="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{{ $pesan->created_at->diffForHumans() }}</p>
                     </div>
                 </a>
             @empty
@@ -174,7 +174,7 @@
                             </div>
                         </td>
                         <td class="px-5 py-3">
-                            <span class="bg-accent dark:bg-primary/20 text-primary text-xs px-2.5 py-1 rounded-full font-medium">
+                            <span class="bg-accent dark:bg-primary/20 text-primary dark:text-amber-200 text-xs px-2.5 py-1 rounded-full font-medium">
                                 {{ $item->kategori->nama_kategori ?? '-' }}
                             </span>
                         </td>
@@ -202,9 +202,14 @@
 
 @push('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+function initProductChart() {
     const ctx = document.getElementById('chartProduk');
     if (!ctx) return;
+
+    // Destroy existing instance if it exists to prevent Chart.js errors on page transitions
+    if (window.productChartInstance) {
+        window.productChartInstance.destroy();
+    }
 
     const labels = @json($chartData->pluck('label'));
     const data   = @json($chartData->pluck('count'));
@@ -214,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
         '#341a02', '#7d4820', '#9E7A5A', '#5a3010', '#d4a574'
     ];
 
-    new Chart(ctx, {
+    window.productChartInstance = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
@@ -255,6 +260,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-});
+}
+
+document.addEventListener('DOMContentLoaded', initProductChart);
+document.addEventListener('turbo:load', initProductChart);
 </script>
 @endpush

@@ -13,8 +13,8 @@
 <div class="max-w-3xl">
     <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
         <div class="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100 dark:border-gray-700">
-            <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
-                <i data-lucide="contact" class="w-4 h-4 text-primary"></i>
+            <div class="w-10 h-10 bg-primary/10 dark:bg-primary/20 rounded-xl flex items-center justify-center">
+                <i data-lucide="contact" class="w-4 h-4 text-primary dark:text-amber-200"></i>
             </div>
             <div>
                 <h3 class="font-semibold text-gray-800 dark:text-white">Informasi Kontak</h3>

@@ -13,10 +13,10 @@ class DashboardController extends Controller
     public function index()
     {
         $stats = [
-            'total_produk'       => InteriorProduk::count(),
-            'total_kategori'     => KategoriInterior::count(),
-            'total_portofolio'   => PortofolioProyek::count(),
-            'total_pesan'        => PesanMasuk::count(),
+            'total_produk' => InteriorProduk::count(),
+            'total_kategori' => KategoriInterior::count(),
+            'total_portofolio' => PortofolioProyek::count(),
+            'total_pesan' => PesanMasuk::count(),
             'pesan_belum_dibaca' => PesanMasuk::belumDibaca()->count(),
         ];
 
@@ -24,7 +24,7 @@ class DashboardController extends Controller
         $chartData = KategoriInterior::withCount('produk')
             ->orderBy('produk_count', 'desc')
             ->get()
-            ->map(fn($k) => [
+            ->map(fn ($k) => [
                 'label' => $k->nama_kategori,
                 'count' => $k->produk_count,
             ]);

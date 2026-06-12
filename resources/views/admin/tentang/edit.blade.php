@@ -19,7 +19,7 @@
         <div class="lg:col-span-2">
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
                 <h3 class="font-semibold text-gray-800 dark:text-white mb-5 flex items-center gap-2">
-                    <i data-lucide="info" class="w-4 h-4 text-primary"></i> Konten Halaman Tentang
+                    <i data-lucide="info" class="w-4 h-4 text-primary dark:text-amber-200"></i> Konten Halaman Tentang
                 </h3>
 
                 <div class="mb-5">
@@ -63,7 +63,7 @@
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5"
                  x-data="{ previewUrl: '{{ $tentang->gambar1_url }}', fileName: '' }">
                 <h4 class="font-medium text-gray-700 dark:text-white mb-3 flex items-center gap-2">
-                    <i data-lucide="image" class="w-4 h-4 text-primary"></i> Gambar 1
+                    <i data-lucide="image" class="w-4 h-4 text-primary dark:text-amber-200"></i> Gambar 1
                 </h4>
                 <div class="border-2 border-dashed border-gray-200 dark:border-gray-600 rounded-xl overflow-hidden cursor-pointer hover:border-primary transition-colors"
                      @click="$refs.g1.click()">
@@ -87,7 +87,7 @@
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5"
                  x-data="{ previewUrl: '{{ $tentang->gambar2_url }}', fileName: '' }">
                 <h4 class="font-medium text-gray-700 dark:text-white mb-3 flex items-center gap-2">
-                    <i data-lucide="image" class="w-4 h-4 text-secondary"></i> Gambar 2
+                    <i data-lucide="image" class="w-4 h-4 text-secondary dark:text-amber-300"></i> Gambar 2
                 </h4>
                 <div class="border-2 border-dashed border-gray-200 dark:border-gray-600 rounded-xl overflow-hidden cursor-pointer hover:border-primary transition-colors"
                      @click="$refs.g2.click()">

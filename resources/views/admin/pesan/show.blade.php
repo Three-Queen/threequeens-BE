@@ -86,7 +86,7 @@
                 <form method="POST" action="{{ route('admin.pesan.tandai', $pesan) }}">
                     @csrf @method('PATCH')
                     <button type="submit"
-                        class="flex items-center gap-2 bg-green-50 hover:bg-green-100 text-green-600 px-5 py-2.5 rounded-xl text-sm font-medium transition-colors">
+                        class="flex items-center gap-2 bg-green-50 hover:bg-green-100 text-green-600 dark:bg-green-950/40 dark:hover:bg-green-900/60 dark:text-green-400 px-5 py-2.5 rounded-xl text-sm font-medium transition-colors">
                         <i data-lucide="check" class="w-4 h-4"></i> Tandai Dibaca
                     </button>
                 </form>
@@ -95,7 +95,7 @@
             <form id="del-pesan-detail" method="POST" action="{{ route('admin.pesan.destroy', $pesan) }}" class="ml-auto">
                 @csrf @method('DELETE')
                 <button type="button" onclick="confirmDelete('del-pesan-detail', 'pesan dari {{ $pesan->nama }}')"
-                    class="flex items-center gap-2 bg-red-50 hover:bg-red-100 text-red-600 px-5 py-2.5 rounded-xl text-sm font-medium transition-colors">
+                    class="flex items-center gap-2 bg-red-50 hover:bg-red-100 text-red-600 dark:bg-red-950/40 dark:hover:bg-red-900/60 dark:text-red-400 px-5 py-2.5 rounded-xl text-sm font-medium transition-colors">
                     <i data-lucide="trash-2" class="w-4 h-4"></i> Hapus
                 </button>
             </form>

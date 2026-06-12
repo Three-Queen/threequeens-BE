@@ -39,8 +39,9 @@ class User extends Authenticatable
     public function getAvatarUrlAttribute(): string
     {
         if ($this->avatar) {
-            return asset('storage/' . $this->avatar);
+            return asset('storage/'.$this->avatar);
         }
-        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&background=6F4E37&color=fff';
+
+        return 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&background=6F4E37&color=fff';
     }
 }

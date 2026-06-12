@@ -11,12 +11,13 @@ class AdminMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        if (!Auth::user()->isSuperAdmin()) {
+        if (! Auth::user()->isSuperAdmin()) {
             Auth::logout();
+
             return redirect()->route('login')->with('error', 'Akses ditolak. Anda tidak memiliki izin.');
         }
 

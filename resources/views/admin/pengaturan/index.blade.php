@@ -30,7 +30,7 @@
             </div>
             <h3 class="font-bold text-gray-800 dark:text-white text-lg">{{ $user->name }}</h3>
             <p class="text-gray-400 text-sm">{{ $user->email }}</p>
-            <span class="mt-2 inline-block bg-accent dark:bg-primary/20 text-primary text-xs px-3 py-1 rounded-full">
+            <span class="mt-2 inline-block bg-accent dark:bg-primary/20 text-primary dark:text-amber-200 text-xs px-3 py-1 rounded-full">
                 Admin
             </span>
         </div>
@@ -42,7 +42,7 @@
         {{-- Update Profil --}}
         <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
             <h3 class="font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
-                <i data-lucide="user" class="w-4 h-4 -edit text-primary"></i> Update Profil
+                <i data-lucide="user" class="w-4 h-4 -edit text-primary dark:text-amber-200"></i> Update Profil
             </h3>
 
             <form method="POST" action="{{ route('admin.pengaturan.profil') }}" enctype="multipart/form-data" id="formProfil">
@@ -96,7 +96,7 @@
         {{-- Update Password --}}
         <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
             <h3 class="font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
-                <i data-lucide="lock" class="w-4 h-4 text-primary"></i> Ubah Password
+                <i data-lucide="lock" class="w-4 h-4 text-primary dark:text-amber-200"></i> Ubah Password
             </h3>
 
             <form method="POST" action="{{ route('admin.pengaturan.password') }}" x-data="{ show1: false, show2: false, show3: false }">

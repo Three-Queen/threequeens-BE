@@ -13,6 +13,7 @@ class PesanController extends Controller
     {
         $pesan = PesanMasuk::latest()->paginate(15);
         $belumDibaca = PesanMasuk::belumDibaca()->count();
+
         return view('admin.pesan.index', compact('pesan', 'belumDibaca'));
     }
 
@@ -22,6 +23,7 @@ class PesanController extends Controller
         if ($pesan->isBelumDibaca()) {
             $pesan->tandaiSudahDibaca();
         }
+
         return view('admin.pesan.show', compact('pesan'));
     }
 

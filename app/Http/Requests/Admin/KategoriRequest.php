@@ -22,7 +22,7 @@ class KategoriRequest extends FormRequest
     {
         return [
             'nama_kategori.required' => 'Nama kategori wajib diisi.',
-            'nama_kategori.max'      => 'Nama kategori maksimal 255 karakter.',
+            'nama_kategori.max' => 'Nama kategori maksimal 255 karakter.',
         ];
     }
 }

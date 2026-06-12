@@ -40,27 +40,27 @@
                 <div class="p-4">
                     <h4 class="font-semibold text-gray-800 dark:text-white mb-1">{{ $item->nama_proyek }}</h4>
                     <p class="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1 mb-1">
-                        <i data-lucide="map-pin" class="w-4 h-4 text-primary"></i> {{ $item->lokasi }}
+                        <i data-lucide="map-pin" class="w-4 h-4 text-primary dark:text-amber-200"></i> {{ $item->lokasi }}
                     </p>
                     @if($item->waktu_proyek)
                         <p class="text-xs text-gray-400 flex items-center gap-1 mb-3">
-                            <i data-lucide="calendar" class="w-4 h-4 text-gray-300"></i> {{ $item->waktu_proyek }}
+                            <i data-lucide="calendar" class="w-4 h-4 text-gray-300 dark:text-gray-500"></i> {{ $item->waktu_proyek }}
                         </p>
                     @endif
 
                     <div class="flex items-center gap-2 pt-3 border-t border-gray-100 dark:border-gray-600">
                         <a href="{{ route('admin.portofolio.show', $item) }}"
-                           class="flex-1 text-center text-xs bg-blue-50 hover:bg-blue-100 text-blue-600 py-1.5 rounded-lg transition-colors">
+                           class="flex-1 text-center text-xs bg-blue-50 hover:bg-blue-100 text-blue-600 dark:bg-blue-950/40 dark:hover:bg-blue-900/60 dark:text-blue-400 py-1.5 rounded-lg transition-colors">
                             <i data-lucide="eye" class="w-4 h-4 mr-1"></i> Detail
                         </a>
                         <a href="{{ route('admin.portofolio.edit', $item) }}"
-                           class="flex-1 text-center text-xs bg-amber-50 hover:bg-amber-100 text-amber-600 py-1.5 rounded-lg transition-colors">
+                           class="flex-1 text-center text-xs bg-amber-50 hover:bg-amber-100 text-amber-600 dark:bg-amber-950/40 dark:hover:bg-amber-900/60 dark:text-amber-400 py-1.5 rounded-lg transition-colors">
                             <i data-lucide="pencil" class="w-4 h-4 mr-1"></i> Edit
                         </a>
                         <form id="del-porto-{{ $item->id }}" method="POST" action="{{ route('admin.portofolio.destroy', $item) }}">
                             @csrf @method('DELETE')
                             <button type="button" onclick="confirmDelete('del-porto-{{ $item->id }}', '{{ $item->nama_proyek }}')"
-                                class="text-xs bg-red-50 hover:bg-red-100 text-red-500 py-1.5 px-2 rounded-lg transition-colors">
+                                class="text-xs bg-red-50 hover:bg-red-100 text-red-500 dark:bg-red-950/40 dark:hover:bg-red-900/60 dark:text-red-400 py-1.5 px-2 rounded-lg transition-colors">
                                 <i data-lucide="trash-2" class="w-4 h-4"></i>
                             </button>
                         </form>

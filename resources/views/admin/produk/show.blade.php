@@ -36,12 +36,12 @@
             <div class="space-y-2">
                 @if($produk->desain_produk_2d)
                     <a href="{{ $produk->desain2d_url }}" target="_blank"
-                       class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl hover:bg-blue-100 transition-colors">
+                       class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-950/40 rounded-xl hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors">
                         <div class="w-9 h-9 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
                             <i data-lucide="layout" class="w-4 h-4 text-blue-500"></i>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <p class="text-sm font-medium text-blue-700 dark:text-blue-400">File Desain 2D</p>
+                            <p class="text-sm font-medium text-blue-700 dark:text-blue-300">File Desain 2D</p>
                             <p class="text-xs text-gray-400 truncate">{{ basename($produk->desain_produk_2d) }}</p>
                         </div>
                         <i data-lucide="download" class="w-4 h-4 text-blue-500"></i>
@@ -49,12 +49,12 @@
                 @endif
                 @if($produk->desain_produk_3d)
                     <a href="{{ $produk->desain3d_url }}" target="_blank"
-                       class="flex items-center gap-3 p-3 bg-purple-50 dark:bg-purple-900/20 rounded-xl hover:bg-purple-100 transition-colors">
+                       class="flex items-center gap-3 p-3 bg-purple-50 dark:bg-purple-950/40 rounded-xl hover:bg-purple-100 dark:hover:bg-purple-900/40 transition-colors">
                         <div class="w-9 h-9 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
                             <i data-lucide="box" class="w-4 h-4 text-purple-500"></i>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <p class="text-sm font-medium text-purple-700 dark:text-purple-400">File Desain 3D</p>
+                            <p class="text-sm font-medium text-purple-700 dark:text-purple-300">File Desain 3D</p>
                             <p class="text-xs text-gray-400 truncate">{{ basename($produk->desain_produk_3d) }}</p>
                         </div>
                         <i data-lucide="download" class="w-4 h-4 text-purple-500"></i>
@@ -96,12 +96,12 @@
             <div class="flex items-start justify-between mb-5">
                 <div>
                     <h2 class="text-2xl font-bold text-gray-800 dark:text-white">{{ $produk->nama_produk }}</h2>
-                    <span class="mt-1 inline-block bg-accent dark:bg-primary/20 text-primary text-sm px-3 py-1 rounded-full">
+                    <span class="mt-1 inline-block bg-accent dark:bg-primary/20 text-primary dark:text-amber-200 text-sm px-3 py-1 rounded-full">
                         {{ $produk->kategori->nama_kategori ?? '-' }}
                     </span>
                 </div>
                 <div class="text-right">
-                    <p class="text-2xl font-bold text-primary">{{ $produk->harga_format }}</p>
+                    <p class="text-2xl font-bold text-primary dark:text-amber-400">{{ $produk->harga_format }}</p>
                 </div>
             </div>
 
@@ -144,7 +144,7 @@
             <form id="delete-show" method="POST" action="{{ route('admin.produk.destroy', $produk) }}" class="ml-auto">
                 @csrf @method('DELETE')
                 <button type="button" onclick="confirmDelete('delete-show', '{{ $produk->nama_produk }}')"
-                    class="flex items-center gap-2 bg-red-50 hover:bg-red-100 text-red-600 px-5 py-2.5 rounded-xl text-sm font-medium transition-colors">
+                    class="flex items-center gap-2 bg-red-50 hover:bg-red-100 text-red-600 dark:bg-red-950/40 dark:hover:bg-red-900/60 dark:text-red-400 px-5 py-2.5 rounded-xl text-sm font-medium transition-colors">
                     <i data-lucide="trash-2" class="w-4 h-4"></i> Hapus
                 </button>
             </form>
@@ -162,7 +162,7 @@
 <div class="mt-8 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
     <div class="p-4 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
         <div class="flex items-center gap-2">
-            <i data-lucide="box" class="w-5 h-5 text-primary"></i>
+            <i data-lucide="box" class="w-5 h-5 text-primary dark:text-amber-200"></i>
             <h3 class="font-semibold text-gray-800 dark:text-white text-base">3D Interactive Viewer</h3>
         </div>
         <div class="text-xs text-gray-500 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full flex items-center gap-1.5 hidden md:flex">

@@ -19,7 +19,7 @@ class ManajemenBeranda extends Model
 
     public function getBackgroundUrlAttribute(): ?string
     {
-        return $this->background ? asset('storage/' . $this->background) : null;
+        return $this->background ? asset('storage/'.$this->background) : null;
     }
 
     public static function getData(): self

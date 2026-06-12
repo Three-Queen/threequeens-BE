@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Facades\Storage;
 
 class InteriorProduk extends Model
 {
@@ -35,21 +34,21 @@ class InteriorProduk extends Model
 
     public function getGambarUrlAttribute(): ?string
     {
-        return $this->gambar_produk ? asset('storage/' . $this->gambar_produk) : null;
+        return $this->gambar_produk ? asset('storage/'.$this->gambar_produk) : null;
     }
 
     public function getDesain3dUrlAttribute(): ?string
     {
-        return $this->desain_produk_3d ? asset('storage/' . $this->desain_produk_3d) : null;
+        return $this->desain_produk_3d ? asset('storage/'.$this->desain_produk_3d) : null;
     }
 
     public function getDesain2dUrlAttribute(): ?string
     {
-        return $this->desain_produk_2d ? asset('storage/' . $this->desain_produk_2d) : null;
+        return $this->desain_produk_2d ? asset('storage/'.$this->desain_produk_2d) : null;
     }
 
     public function getHargaFormatAttribute(): string
     {
-        return 'Rp ' . number_format($this->harga_produk, 0, ',', '.');
+        return 'Rp '.number_format($this->harga_produk, 0, ',', '.');
     }
 }

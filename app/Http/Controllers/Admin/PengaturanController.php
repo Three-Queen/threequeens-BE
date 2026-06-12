@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\UpdateProfilRequest;
 use App\Http\Requests\Admin\UpdatePasswordRequest;
+use App\Http\Requests\Admin\UpdateProfilRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -16,6 +16,7 @@ class PengaturanController extends Controller
     public function index(): View
     {
         $user = Auth::user();
+
         return view('admin.pengaturan.index', compact('user'));
     }
 
@@ -43,7 +44,7 @@ class PengaturanController extends Controller
     {
         $user = Auth::user();
 
-        if (!Hash::check($request->password_lama, $user->password)) {
+        if (! Hash::check($request->password_lama, $user->password)) {
             return redirect()->back()
                 ->withErrors(['password_lama' => 'Password lama tidak sesuai.'])
                 ->withInput();

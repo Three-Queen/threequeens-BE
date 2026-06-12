@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\ManajemenBeranda;
-use App\Models\ManajemenTentang;
-use App\Models\ManajemenKontak;
-use App\Models\KategoriInterior;
 use App\Models\InteriorProduk;
-use App\Models\PortofolioProyek;
+use App\Models\KategoriInterior;
+use App\Models\ManajemenBeranda;
+use App\Models\ManajemenKontak;
+use App\Models\ManajemenTentang;
 use App\Models\PesanMasuk;
+use App\Models\PortofolioProyek;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -86,7 +86,7 @@ class LandingPageController extends Controller
                 'categories' => $categories,
                 'products' => $products,
                 'portfolios' => $portfolios,
-            ]
+            ],
         ]);
     }
 

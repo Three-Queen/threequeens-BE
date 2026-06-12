@@ -58,7 +58,7 @@
                             </div>
                         </td>
                         <td class="px-5 py-3">
-                            <span class="bg-accent dark:bg-primary/20 text-primary text-xs px-2.5 py-1 rounded-full font-medium">
+                            <span class="bg-accent dark:bg-primary/20 text-primary dark:text-amber-200 text-xs px-2.5 py-1 rounded-full font-medium">
                                 {{ $item->kategori->nama_kategori ?? '-' }}
                             </span>
                         </td>
@@ -68,24 +68,24 @@
                         <td class="px-5 py-3">
                             <div class="flex items-center justify-center gap-1.5">
                                 @if($item->desain_produk_2d)
-                                    <span class="bg-blue-50 text-blue-600 text-xs px-2 py-0.5 rounded-full" title="File 2D">2D</span>
+                                    <span class="bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-300 text-xs px-2 py-0.5 rounded-full" title="File 2D">2D</span>
                                 @endif
                                 @if($item->desain_produk_3d)
-                                    <span class="bg-purple-50 text-purple-600 text-xs px-2 py-0.5 rounded-full" title="File 3D">3D</span>
+                                    <span class="bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-300 text-xs px-2 py-0.5 rounded-full" title="File 3D">3D</span>
                                 @endif
                                 @if(!$item->desain_produk_2d && !$item->desain_produk_3d)
-                                    <span class="text-gray-300 text-xs">-</span>
+                                    <span class="text-gray-300 dark:text-gray-600 text-xs">-</span>
                                 @endif
                             </div>
                         </td>
                         <td class="px-5 py-3">
                             <div class="flex items-center justify-center gap-2">
                                 <a href="{{ route('admin.produk.show', $item) }}"
-                                   class="w-8 h-8 flex items-center justify-center bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg transition-colors" title="Detail">
+                                   class="w-8 h-8 flex items-center justify-center bg-blue-50 hover:bg-blue-100 text-blue-600 dark:bg-blue-950/40 dark:hover:bg-blue-900/60 dark:text-blue-400 rounded-lg transition-colors" title="Detail">
                                     <i data-lucide="eye" class="w-3.5 h-3.5"></i>
                                 </a>
                                 <a href="{{ route('admin.produk.edit', $item) }}"
-                                   class="w-8 h-8 flex items-center justify-center bg-amber-50 hover:bg-amber-100 text-amber-600 rounded-lg transition-colors" title="Edit">
+                                   class="w-8 h-8 flex items-center justify-center bg-amber-50 hover:bg-amber-100 text-amber-600 dark:bg-amber-950/40 dark:hover:bg-amber-900/60 dark:text-amber-400 rounded-lg transition-colors" title="Edit">
                                     <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
                                 </a>
                                 <form id="delete-produk-{{ $item->id }}" method="POST"
@@ -93,7 +93,7 @@
                                     @csrf @method('DELETE')
                                     <button type="button"
                                         onclick="confirmDelete('delete-produk-{{ $item->id }}', '{{ $item->nama_produk }}')"
-                                        class="w-8 h-8 flex items-center justify-center bg-red-50 hover:bg-red-100 text-red-500 rounded-lg transition-colors" title="Hapus">
+                                        class="w-8 h-8 flex items-center justify-center bg-red-50 hover:bg-red-100 text-red-500 dark:bg-red-950/40 dark:hover:bg-red-900/60 dark:text-red-400 rounded-lg transition-colors" title="Hapus">
                                         <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                                     </button>
                                 </form>

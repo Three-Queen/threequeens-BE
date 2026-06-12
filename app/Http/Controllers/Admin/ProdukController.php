@@ -15,12 +15,14 @@ class ProdukController extends Controller
     public function index(): View
     {
         $produk = InteriorProduk::with('kategori')->latest()->paginate(10);
+
         return view('admin.produk.index', compact('produk'));
     }
 
     public function create(): View
     {
         $kategori = KategoriInterior::orderBy('nama_kategori')->get();
+
         return view('admin.produk.create', compact('kategori'));
     }
 
@@ -31,21 +33,21 @@ class ProdukController extends Controller
         // Upload gambar produk
         if ($request->hasFile('gambar_produk')) {
             $file = $request->file('gambar_produk');
-            $filename = pathinfo($file->hashName(), PATHINFO_FILENAME) . '.' . $file->getClientOriginalExtension();
+            $filename = pathinfo($file->hashName(), PATHINFO_FILENAME).'.'.$file->getClientOriginalExtension();
             $data['gambar_produk'] = $file->storeAs('produk/gambar', $filename, 'public');
         }
 
         // Upload desain 3D
         if ($request->hasFile('desain_produk_3d')) {
             $file = $request->file('desain_produk_3d');
-            $filename = pathinfo($file->hashName(), PATHINFO_FILENAME) . '.' . $file->getClientOriginalExtension();
+            $filename = pathinfo($file->hashName(), PATHINFO_FILENAME).'.'.$file->getClientOriginalExtension();
             $data['desain_produk_3d'] = $file->storeAs('produk/3d', $filename, 'public');
         }
 
         // Upload desain 2D
         if ($request->hasFile('desain_produk_2d')) {
             $file = $request->file('desain_produk_2d');
-            $filename = pathinfo($file->hashName(), PATHINFO_FILENAME) . '.' . $file->getClientOriginalExtension();
+            $filename = pathinfo($file->hashName(), PATHINFO_FILENAME).'.'.$file->getClientOriginalExtension();
             $data['desain_produk_2d'] = $file->storeAs('produk/2d', $filename, 'public');
         }
 
@@ -58,12 +60,14 @@ class ProdukController extends Controller
     public function show(InteriorProduk $produk): View
     {
         $produk->load('kategori');
+
         return view('admin.produk.show', compact('produk'));
     }
 
     public function edit(InteriorProduk $produk): View
     {
         $kategori = KategoriInterior::orderBy('nama_kategori')->get();
+
         return view('admin.produk.edit', compact('produk', 'kategori'));
     }
 
@@ -73,9 +77,11 @@ class ProdukController extends Controller
 
         // Upload gambar produk
         if ($request->hasFile('gambar_produk')) {
-            if ($produk->gambar_produk) Storage::disk('public')->delete($produk->gambar_produk);
+            if ($produk->gambar_produk) {
+                Storage::disk('public')->delete($produk->gambar_produk);
+            }
             $file = $request->file('gambar_produk');
-            $filename = pathinfo($file->hashName(), PATHINFO_FILENAME) . '.' . $file->getClientOriginalExtension();
+            $filename = pathinfo($file->hashName(), PATHINFO_FILENAME).'.'.$file->getClientOriginalExtension();
             $data['gambar_produk'] = $file->storeAs('produk/gambar', $filename, 'public');
         } else {
             unset($data['gambar_produk']);
@@ -83,9 +89,11 @@ class ProdukController extends Controller
 
         // Upload desain 3D
         if ($request->hasFile('desain_produk_3d')) {
-            if ($produk->desain_produk_3d) Storage::disk('public')->delete($produk->desain_produk_3d);
+            if ($produk->desain_produk_3d) {
+                Storage::disk('public')->delete($produk->desain_produk_3d);
+            }
             $file = $request->file('desain_produk_3d');
-            $filename = pathinfo($file->hashName(), PATHINFO_FILENAME) . '.' . $file->getClientOriginalExtension();
+            $filename = pathinfo($file->hashName(), PATHINFO_FILENAME).'.'.$file->getClientOriginalExtension();
             $data['desain_produk_3d'] = $file->storeAs('produk/3d', $filename, 'public');
         } else {
             unset($data['desain_produk_3d']);
@@ -93,9 +101,11 @@ class ProdukController extends Controller
 
         // Upload desain 2D
         if ($request->hasFile('desain_produk_2d')) {
-            if ($produk->desain_produk_2d) Storage::disk('public')->delete($produk->desain_produk_2d);
+            if ($produk->desain_produk_2d) {
+                Storage::disk('public')->delete($produk->desain_produk_2d);
+            }
             $file = $request->file('desain_produk_2d');
-            $filename = pathinfo($file->hashName(), PATHINFO_FILENAME) . '.' . $file->getClientOriginalExtension();
+            $filename = pathinfo($file->hashName(), PATHINFO_FILENAME).'.'.$file->getClientOriginalExtension();
             $data['desain_produk_2d'] = $file->storeAs('produk/2d', $filename, 'public');
         } else {
             unset($data['desain_produk_2d']);

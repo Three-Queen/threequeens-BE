@@ -59,7 +59,7 @@
                         @if($item->no_hp) · <i data-lucide="phone" class="w-4 h-4 mr-1"></i>{{ $item->no_hp }} @endif
                     </p>
                     <p class="text-sm text-gray-600 dark:text-gray-300 truncate">{{ Str::limit($item->pesan, 80) }}</p>
-                    <p class="text-xs text-gray-300 dark:text-gray-500 mt-1">
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
                         <i data-lucide="clock" class="w-4 h-4 mr-1"></i>{{ $item->created_at->format('d M Y H:i') }}
                         ({{ $item->created_at->diffForHumans() }})
                     </p>
@@ -68,14 +68,14 @@
                 {{-- Actions --}}
                 <div class="flex items-center gap-2 flex-shrink-0">
                     <a href="{{ route('admin.pesan.show', $item) }}"
-                       class="w-8 h-8 flex items-center justify-center bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg transition-colors" title="Baca">
+                       class="w-8 h-8 flex items-center justify-center bg-blue-50 hover:bg-blue-100 text-blue-600 dark:bg-blue-950/40 dark:hover:bg-blue-900/60 dark:text-blue-400 rounded-lg transition-colors" title="Baca">
                         <i data-lucide="eye" class="w-3.5 h-3.5"></i>
                     </a>
                     @if($item->isBelumDibaca())
                         <form method="POST" action="{{ route('admin.pesan.tandai', $item) }}">
                             @csrf @method('PATCH')
                             <button type="submit" title="Tandai dibaca"
-                                class="w-8 h-8 flex items-center justify-center bg-green-50 hover:bg-green-100 text-green-600 rounded-lg transition-colors">
+                                class="w-8 h-8 flex items-center justify-center bg-green-50 hover:bg-green-100 text-green-600 dark:bg-green-950/40 dark:hover:bg-green-900/60 dark:text-green-400 rounded-lg transition-colors">
                                 <i data-lucide="check" class="w-3.5 h-3.5"></i>
                             </button>
                         </form>
@@ -83,7 +83,7 @@
                     <form id="del-pesan-{{ $item->id }}" method="POST" action="{{ route('admin.pesan.destroy', $item) }}">
                         @csrf @method('DELETE')
                         <button type="button" onclick="confirmDelete('del-pesan-{{ $item->id }}', 'pesan dari {{ $item->nama }}')"
-                            class="w-8 h-8 flex items-center justify-center bg-red-50 hover:bg-red-100 text-red-500 rounded-lg transition-colors" title="Hapus">
+                            class="w-8 h-8 flex items-center justify-center bg-red-50 hover:bg-red-100 text-red-500 dark:bg-red-950/40 dark:hover:bg-red-900/60 dark:text-red-400 rounded-lg transition-colors" title="Hapus">
                             <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                         </button>
                     </form>

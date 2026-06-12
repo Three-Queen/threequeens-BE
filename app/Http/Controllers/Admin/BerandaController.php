@@ -14,6 +14,7 @@ class BerandaController extends Controller
     public function edit(): View
     {
         $beranda = ManajemenBeranda::getData();
+
         return view('admin.beranda.edit', compact('beranda'));
     }
 

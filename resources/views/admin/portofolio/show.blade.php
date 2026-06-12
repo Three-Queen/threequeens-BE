@@ -27,8 +27,8 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
                 <div class="flex items-center gap-3 p-3 bg-accent/50 dark:bg-gray-700/50 rounded-xl">
-                    <div class="w-9 h-9 bg-primary/10 rounded-lg flex items-center justify-center">
-                        <i data-lucide="map-pin" class="w-4 h-4 text-primary"></i>
+                    <div class="w-9 h-9 bg-primary/10 dark:bg-primary/20 rounded-lg flex items-center justify-center">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-primary dark:text-amber-200"></i>
                     </div>
                     <div>
                         <p class="text-xs text-gray-400 uppercase tracking-wide">Lokasi</p>
@@ -38,8 +38,8 @@
 
                 @if($portofolio->waktu_proyek)
                     <div class="flex items-center gap-3 p-3 bg-accent/50 dark:bg-gray-700/50 rounded-xl">
-                        <div class="w-9 h-9 bg-primary/10 rounded-lg flex items-center justify-center">
-                            <i data-lucide="calendar" class="w-4 h-4 text-primary"></i>
+                        <div class="w-9 h-9 bg-primary/10 dark:bg-primary/20 rounded-lg flex items-center justify-center">
+                            <i data-lucide="calendar" class="w-4 h-4 text-primary dark:text-amber-200"></i>
                         </div>
                         <div>
                             <p class="text-xs text-gray-400 uppercase tracking-wide">Waktu</p>
@@ -59,7 +59,7 @@
             @if($portofolio->lokasi_google_maps)
                 <div class="mb-5">
                     <a href="{{ $portofolio->lokasi_google_maps }}" target="_blank"
-                       class="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 bg-blue-50 hover:bg-blue-100 px-4 py-2.5 rounded-xl transition-colors">
+                       class="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/40 dark:hover:bg-blue-900/60 px-4 py-2.5 rounded-xl transition-colors">
                         <i data-lucide="map" class="w-4 h-4"></i>
                         Lihat di Google Maps
                     </a>
@@ -78,7 +78,7 @@
                 <form id="del-porto-show" method="POST" action="{{ route('admin.portofolio.destroy', $portofolio) }}" class="ml-auto">
                     @csrf @method('DELETE')
                     <button type="button" onclick="confirmDelete('del-porto-show', '{{ $portofolio->nama_proyek }}')"
-                        class="flex items-center gap-2 bg-red-50 hover:bg-red-100 text-red-600 px-5 py-2.5 rounded-xl text-sm font-medium transition-colors">
+                        class="flex items-center gap-2 bg-red-50 hover:bg-red-100 text-red-600 dark:bg-red-950/40 dark:hover:bg-red-900/60 dark:text-red-400 px-5 py-2.5 rounded-xl text-sm font-medium transition-colors">
                         <i data-lucide="trash-2" class="w-4 h-4"></i> Hapus
                     </button>
                 </form>
