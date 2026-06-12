@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\KategoriInterior;
 use App\Models\InteriorProduk;
+use App\Models\KategoriInterior;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder

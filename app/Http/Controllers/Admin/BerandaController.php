@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\BerandaRequest;
 use App\Models\ManajemenBeranda;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class BerandaController extends Controller
@@ -25,7 +25,7 @@ class BerandaController extends Controller
 
         if ($request->hasFile('background')) {
             if ($beranda->background) {
-                Storage::disk('public')->delete($beranda->background);
+                StorageHelper::deleteSafe($beranda->background);
             }
             $data['background'] = $request->file('background')
                 ->store('beranda', 'public');

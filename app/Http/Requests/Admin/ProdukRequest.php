@@ -18,7 +18,7 @@ class ProdukRequest extends FormRequest
             'deskripsi_produk' => ['nullable', 'string'],
             'harga_produk' => ['nullable', 'numeric', 'min:0'],
             'gambar_produk' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:5120'],
-            'desain_produk_3d' => ['nullable', 'file', 'mimes:pdf,dwg,skp,3ds,obj,fbx,zip,glb,gltf', 'max:51200'],
+            'desain_produk_3d' => ['nullable', 'file', 'extensions:pdf,dwg,skp,3ds,obj,fbx,zip,glb,gltf', 'max:51200'],
             'desain_produk_2d' => ['nullable', 'file', 'extensions:pdf,dwg,jpg,jpeg,png,zip', 'max:51200'],
             'pengerjaan_produk' => ['nullable', 'string'],
             'kategori_id' => ['required', 'exists:kategori_interior,id'],

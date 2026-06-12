@@ -67,7 +67,7 @@
         {{-- Quick Reply via WA --}}
         @if($pesan->no_hp)
             <div class="px-5 pb-4">
-                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $pesan->no_hp) }}" target="_blank"
+                <a href="{{ $pesan->whatsapp_link }}" target="_blank"
                    class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white text-sm px-4 py-2.5 rounded-xl transition-colors">
                     <i class="fab fa-whatsapp"></i>
                     Balas via WhatsApp

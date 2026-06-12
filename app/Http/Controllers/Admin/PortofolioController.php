@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PortofolioRequest;
 use App\Models\PortofolioProyek;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class PortofolioController extends Controller
@@ -54,7 +54,7 @@ class PortofolioController extends Controller
 
         if ($request->hasFile('dokumentasi_proyek')) {
             if ($portofolio->dokumentasi_proyek) {
-                Storage::disk('public')->delete($portofolio->dokumentasi_proyek);
+                StorageHelper::deleteSafe($portofolio->dokumentasi_proyek);
             }
             $data['dokumentasi_proyek'] = $request->file('dokumentasi_proyek')
                 ->store('portofolio/dokumentasi', 'public');
@@ -71,7 +71,7 @@ class PortofolioController extends Controller
     public function destroy(PortofolioProyek $portofolio): RedirectResponse
     {
         if ($portofolio->dokumentasi_proyek) {
-            Storage::disk('public')->delete($portofolio->dokumentasi_proyek);
+            StorageHelper::deleteSafe($portofolio->dokumentasi_proyek);
         }
 
         $portofolio->delete();

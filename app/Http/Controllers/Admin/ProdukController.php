@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProdukRequest;
 use App\Models\InteriorProduk;
 use App\Models\KategoriInterior;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProdukController extends Controller
@@ -78,7 +78,7 @@ class ProdukController extends Controller
         // Upload gambar produk
         if ($request->hasFile('gambar_produk')) {
             if ($produk->gambar_produk) {
-                Storage::disk('public')->delete($produk->gambar_produk);
+                StorageHelper::deleteSafe($produk->gambar_produk);
             }
             $file = $request->file('gambar_produk');
             $filename = pathinfo($file->hashName(), PATHINFO_FILENAME).'.'.$file->getClientOriginalExtension();
@@ -90,7 +90,7 @@ class ProdukController extends Controller
         // Upload desain 3D
         if ($request->hasFile('desain_produk_3d')) {
             if ($produk->desain_produk_3d) {
-                Storage::disk('public')->delete($produk->desain_produk_3d);
+                StorageHelper::deleteSafe($produk->desain_produk_3d);
             }
             $file = $request->file('desain_produk_3d');
             $filename = pathinfo($file->hashName(), PATHINFO_FILENAME).'.'.$file->getClientOriginalExtension();
@@ -102,7 +102,7 @@ class ProdukController extends Controller
         // Upload desain 2D
         if ($request->hasFile('desain_produk_2d')) {
             if ($produk->desain_produk_2d) {
-                Storage::disk('public')->delete($produk->desain_produk_2d);
+                StorageHelper::deleteSafe($produk->desain_produk_2d);
             }
             $file = $request->file('desain_produk_2d');
             $filename = pathinfo($file->hashName(), PATHINFO_FILENAME).'.'.$file->getClientOriginalExtension();
@@ -121,13 +121,13 @@ class ProdukController extends Controller
     {
         // Hapus file terkait
         if ($produk->gambar_produk) {
-            Storage::disk('public')->delete($produk->gambar_produk);
+            StorageHelper::deleteSafe($produk->gambar_produk);
         }
         if ($produk->desain_produk_3d) {
-            Storage::disk('public')->delete($produk->desain_produk_3d);
+            StorageHelper::deleteSafe($produk->desain_produk_3d);
         }
         if ($produk->desain_produk_2d) {
-            Storage::disk('public')->delete($produk->desain_produk_2d);
+            StorageHelper::deleteSafe($produk->desain_produk_2d);
         }
 
         $produk->delete();
