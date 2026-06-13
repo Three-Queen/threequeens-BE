@@ -6,7 +6,11 @@ use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PortofolioRequest;
 use App\Models\PortofolioProyek;
+use App\Models\KategoriInterior;
+use App\Models\InteriorProduk;
+use App\Models\PortofolioGaleri;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 
 class PortofolioController extends Controller
@@ -20,7 +24,9 @@ class PortofolioController extends Controller
 
     public function create(): View
     {
-        return view('admin.portofolio.create');
+        $kategoris = KategoriInterior::all();
+        $produks = InteriorProduk::all();
+        return view('admin.portofolio.create', compact('kategoris', 'produks'));
     }
 
     public function store(PortofolioRequest $request): RedirectResponse
@@ -33,7 +39,18 @@ class PortofolioController extends Controller
                 ->store('portofolio/dokumentasi', 'public');
         }
 
-        PortofolioProyek::create($data);
+        $portofolio = PortofolioProyek::create($data);
+
+        if ($request->filled('produk_ids')) {
+            $portofolio->produk()->sync($request->produk_ids);
+        }
+
+        if ($request->hasFile('galeri')) {
+            foreach ($request->file('galeri') as $file) {
+                $path = $file->store('portofolio/galeri', 'public');
+                $portofolio->galeri()->create(['gambar_url' => $path]);
+            }
+        }
 
         return redirect()->route('admin.portofolio.index')
             ->with('success', 'Proyek portofolio berhasil ditambahkan.');
@@ -46,7 +63,10 @@ class PortofolioController extends Controller
 
     public function edit(PortofolioProyek $portofolio): View
     {
-        return view('admin.portofolio.edit', compact('portofolio'));
+        $kategoris = KategoriInterior::all();
+        $produks = InteriorProduk::all();
+        $selectedProduks = $portofolio->produk->pluck('id')->toArray();
+        return view('admin.portofolio.edit', compact('portofolio', 'kategoris', 'produks', 'selectedProduks'));
     }
 
     public function update(PortofolioRequest $request, PortofolioProyek $portofolio): RedirectResponse
@@ -65,6 +85,19 @@ class PortofolioController extends Controller
 
         $portofolio->update($data);
 
+        if ($request->has('produk_ids')) {
+            $portofolio->produk()->sync($request->produk_ids);
+        } else {
+            $portofolio->produk()->detach();
+        }
+
+        if ($request->hasFile('galeri')) {
+            foreach ($request->file('galeri') as $file) {
+                $path = $file->store('portofolio/galeri', 'public');
+                $portofolio->galeri()->create(['gambar_url' => $path]);
+            }
+        }
+
         return redirect()->route('admin.portofolio.index')
             ->with('success', 'Proyek portofolio berhasil diperbarui.');
     }
@@ -75,9 +108,25 @@ class PortofolioController extends Controller
             StorageHelper::deleteSafe($portofolio->dokumentasi_proyek);
         }
 
+        foreach ($portofolio->galeri as $galeri) {
+            StorageHelper::deleteSafe($galeri->gambar_url);
+        }
+
         $portofolio->delete();
 
         return redirect()->route('admin.portofolio.index')
             ->with('success', 'Proyek portofolio berhasil dihapus.');
+    }
+
+    public function destroyGaleri($id): JsonResponse
+    {
+        $galeri = PortofolioGaleri::findOrFail($id);
+        StorageHelper::deleteSafe($galeri->gambar_url);
+        $galeri->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Foto galeri berhasil dihapus'
+        ]);
     }
 }

@@ -52,6 +52,7 @@ class LandingPageController extends Controller
             ->map(function ($item) {
                 return [
                     'id' => $item->id,
+                    'kode_produk' => $item->kode_produk,
                     'nama_produk' => $item->nama_produk,
                     'deskripsi_produk' => $item->deskripsi_produk,
                     'harga_produk' => $item->harga_produk,
@@ -64,16 +65,28 @@ class LandingPageController extends Controller
                 ];
             });
 
-        $portfolios = PortofolioProyek::get()
+        $portfolios = PortofolioProyek::with(['kategori', 'produk', 'galeri'])->get()
             ->map(function ($item) {
                 return [
                     'id' => $item->id,
+                    'slug' => $item->slug,
                     'nama_proyek' => $item->nama_proyek,
+                    'kategori' => $item->kategori ? $item->kategori->nama_kategori : null,
                     'deskripsi' => $item->deskripsi,
                     'lokasi' => $item->lokasi,
                     'lokasi_google_maps' => $item->lokasi_google_maps,
                     'dokumentasi_url' => $item->dokumentasi_url,
                     'waktu_proyek' => $item->waktu_proyek,
+                    'durasi_pengerjaan' => $item->durasi_pengerjaan,
+                    'galeri' => $item->galeri->pluck('url'),
+                    'produk' => $item->produk->map(function ($prod) {
+                        return [
+                            'kode_produk' => $prod->kode_produk,
+                            'nama_produk' => $prod->nama_produk,
+                            'gambar_url' => $prod->gambar_url,
+                            'deskripsi_produk' => $prod->deskripsi_produk,
+                        ];
+                    }),
                 ];
             });
 

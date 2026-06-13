@@ -13,17 +13,34 @@ class PortofolioProyek extends Model
 
     protected $fillable = [
         'slug',
+        'kategori_id',
         'nama_proyek',
         'deskripsi',
         'lokasi',
         'lokasi_google_maps',
         'dokumentasi_proyek',
         'waktu_proyek',
+        'durasi_pengerjaan',
     ];
 
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(KategoriInterior::class, 'kategori_id');
+    }
+
+    public function produk()
+    {
+        return $this->belongsToMany(InteriorProduk::class, 'portofolio_produk', 'portofolio_proyek_id', 'interior_produk_id');
+    }
+
+    public function galeri()
+    {
+        return $this->hasMany(PortofolioGaleri::class, 'portofolio_proyek_id');
     }
 
     public function getDokumentasiUrlAttribute(): ?string

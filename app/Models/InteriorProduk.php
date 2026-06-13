@@ -43,6 +43,11 @@ class InteriorProduk extends Model
         return $this->belongsTo(KategoriInterior::class, 'kategori_id');
     }
 
+    public function portofolios()
+    {
+        return $this->belongsToMany(PortofolioProyek::class, 'portofolio_produk', 'interior_produk_id', 'portofolio_proyek_id');
+    }
+
     public function getGambarUrlAttribute(): ?string
     {
         return $this->gambar_produk ? asset('storage/'.$this->gambar_produk) : null;

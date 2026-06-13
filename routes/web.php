@@ -42,6 +42,7 @@ Route::prefix('admin')
         Route::resource('produk', ProdukController::class);
 
         // Portofolio Proyek
+        Route::delete('portofolio/galeri/{id}', [PortofolioController::class, 'destroyGaleri'])->name('portofolio.galeri.destroy');
         Route::resource('portofolio', PortofolioController::class);
 
         // Manajemen Beranda
