@@ -12,6 +12,40 @@ use Illuminate\View\View;
 
 class ProdukController extends Controller
 {
+    private function getInitials($string)
+    {
+        if (!$string) return '';
+        $words = explode(' ', $string);
+        $initials = '';
+        foreach ($words as $word) {
+            $word = preg_replace('/[^A-Za-z0-9]/', '', $word);
+            if ($word !== '') {
+                $initials .= strtoupper(substr($word, 0, 1));
+            }
+        }
+        return $initials;
+    }
+
+    private function generateKodeProduk($namaProduk, $kategoriId, $index)
+    {
+        $kategori = KategoriInterior::find($kategoriId);
+        $layananInit = $kategori ? $this->getInitials($kategori->tipe_layanan) : '';
+        $kategoriInit = $kategori ? $this->getInitials($kategori->nama_kategori) : '';
+        $produkInit = $this->getInitials($namaProduk);
+        
+        return sprintf('%s-%s-%s-%03d', $layananInit, $kategoriInit, $produkInit, $index);
+    }
+
+    private function getNextIndex()
+    {
+        $lastProduct = InteriorProduk::orderBy('id', 'desc')->first();
+        if ($lastProduct && $lastProduct->kode_produk) {
+            $parts = explode('-', $lastProduct->kode_produk);
+            return (int) end($parts) + 1;
+        }
+        return InteriorProduk::count() + 1;
+    }
+
     public function index(): View
     {
         $produk = InteriorProduk::with('kategori')->latest()->paginate(10);
@@ -22,13 +56,16 @@ class ProdukController extends Controller
     public function create(): View
     {
         $kategori = KategoriInterior::orderBy('nama_kategori')->get();
+        $nextIndex = $this->getNextIndex();
 
-        return view('admin.produk.create', compact('kategori'));
+        return view('admin.produk.create', compact('kategori', 'nextIndex'));
     }
 
     public function store(ProdukRequest $request): RedirectResponse
     {
         $data = $request->validated();
+
+        $data['kode_produk'] = $this->generateKodeProduk($data['nama_produk'], $data['kategori_id'], $this->getNextIndex());
 
         // Upload gambar produk
         if ($request->hasFile('gambar_produk')) {
@@ -67,13 +104,27 @@ class ProdukController extends Controller
     public function edit(InteriorProduk $produk): View
     {
         $kategori = KategoriInterior::orderBy('nama_kategori')->get();
+        
+        $currentIndex = 1;
+        if ($produk->kode_produk) {
+            $parts = explode('-', $produk->kode_produk);
+            $currentIndex = (int) end($parts);
+        }
 
-        return view('admin.produk.edit', compact('produk', 'kategori'));
+        return view('admin.produk.edit', compact('produk', 'kategori', 'currentIndex'));
     }
 
     public function update(ProdukRequest $request, InteriorProduk $produk): RedirectResponse
     {
         $data = $request->validated();
+
+        // Preserve original index
+        $currentIndex = 1;
+        if ($produk->kode_produk) {
+            $parts = explode('-', $produk->kode_produk);
+            $currentIndex = (int) end($parts);
+        }
+        $data['kode_produk'] = $this->generateKodeProduk($data['nama_produk'], $data['kategori_id'], $currentIndex);
 
         // Upload gambar produk
         if ($request->hasFile('gambar_produk')) {

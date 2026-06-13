@@ -26,6 +26,7 @@ class PortofolioController extends Controller
     public function store(PortofolioRequest $request): RedirectResponse
     {
         $data = $request->validated();
+        $data['slug'] = \Illuminate\Support\Str::random(10);
 
         if ($request->hasFile('dokumentasi_proyek')) {
             $data['dokumentasi_proyek'] = $request->file('dokumentasi_proyek')

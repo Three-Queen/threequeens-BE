@@ -13,6 +13,7 @@ class InteriorProduk extends Model
     protected $table = 'interior_produk';
 
     protected $fillable = [
+        'kode_produk',
         'nama_produk',
         'deskripsi_produk',
         'harga_produk',
@@ -26,6 +27,16 @@ class InteriorProduk extends Model
     protected $casts = [
         'harga_produk' => 'decimal:2',
     ];
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'kode_produk';
+    }
 
     public function kategori(): BelongsTo
     {

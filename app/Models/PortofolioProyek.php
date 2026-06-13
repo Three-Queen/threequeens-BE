@@ -12,6 +12,7 @@ class PortofolioProyek extends Model
     protected $table = 'portofolio_proyek';
 
     protected $fillable = [
+        'slug',
         'nama_proyek',
         'deskripsi',
         'lokasi',
@@ -19,6 +20,11 @@ class PortofolioProyek extends Model
         'dokumentasi_proyek',
         'waktu_proyek',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function getDokumentasiUrlAttribute(): ?string
     {

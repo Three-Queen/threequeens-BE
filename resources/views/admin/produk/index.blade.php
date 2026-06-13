@@ -29,7 +29,7 @@
         <table class="w-full">
             <thead>
                 <tr class="bg-accent/50 dark:bg-gray-700/30">
-                    <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide w-10">No</th>
+                    <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Kode Produk</th>
                     <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Produk</th>
                     <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Kategori</th>
                     <th class="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Harga</th>
@@ -40,7 +40,7 @@
             <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
                 @forelse($produk as $i => $item)
                     <tr class="transition-colors">
-                        <td class="px-5 py-3 text-sm text-gray-500">{{ $produk->firstItem() + $i }}</td>
+                        <td class="px-5 py-3 text-sm font-mono font-medium text-primary dark:text-amber-200">{{ $item->kode_produk }}</td>
                         <td class="px-5 py-3">
                             <div class="flex items-center gap-3">
                                 @if($item->gambar_produk)
