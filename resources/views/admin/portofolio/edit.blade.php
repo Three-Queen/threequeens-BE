@@ -67,20 +67,17 @@
                 </div>
             </div>
 
-            <div class="mb-5" x-data="{ previewUrl: '{{ $portofolio->dokumentasi_url }}', fileName: '' }">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Dokumentasi Proyek</label>
-                <div class="border-2 border-dashed border-gray-200 dark:border-gray-600 rounded-xl p-4 text-center cursor-pointer hover:border-primary transition-colors"
-                     @click="$refs.dI.click()">
-                    <template x-if="previewUrl">
-                        <img :src="previewUrl" class="w-full h-40 object-cover rounded-lg">
-                    </template>
-                    <template x-if="!previewUrl">
-                        <div><i data-lucide="camera" class="w-8 h-8 text-gray-300 mb-2"></i><p class="text-sm text-gray-400">Upload foto baru</p></div>
-                    </template>
-                </div>
-                <input type="file" name="dokumentasi_proyek" x-ref="dI" accept="image/*" class="hidden"
-                    @change="const f=event.target.files[0];if(f){fileName=f.name;const r=new FileReader();r.onload=e=>previewUrl=e.target.result;r.readAsDataURL(f)}">
-                <p x-text="fileName || 'Biarkan kosong untuk mempertahankan foto saat ini'" class="text-xs text-gray-400 mt-2 text-center truncate"></p>
+            <div class="mb-5">
+                <x-file-dropzone
+                    name="dokumentasi_proyek"
+                    label="Dokumentasi Proyek"
+                    accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+                    hint="JPG, PNG, WEBP, HEIC (max 10MB) — kosongkan untuk pertahankan"
+                    :is-image="true"
+                    :preview-url="$portofolio->dokumentasi_url"
+                    color="primary"
+                    error="dokumentasi_proyek"
+                />
             </div>
 
             <div class="flex items-center gap-3">

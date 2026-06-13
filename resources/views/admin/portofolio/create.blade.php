@@ -72,24 +72,16 @@
             </div>
 
             {{-- Dokumentasi --}}
-            <div class="mb-5" x-data="imagePreview()">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Dokumentasi Proyek</label>
-                <div class="border-2 border-dashed border-gray-200 dark:border-gray-600 rounded-xl p-5 text-center cursor-pointer hover:border-primary transition-colors"
-                     @click="$refs.dInput.click()">
-                    <template x-if="!previewUrl">
-                        <div>
-                            <i data-lucide="camera" class="w-8 h-8 text-gray-300 mb-2"></i>
-                            <p class="text-sm text-gray-400">Upload foto dokumentasi</p>
-                            <p class="text-xs text-gray-300 mt-1">JPG, PNG, WEBP (max 10MB)</p>
-                        </div>
-                    </template>
-                    <template x-if="previewUrl">
-                        <img :src="previewUrl" class="w-full h-48 object-cover rounded-lg">
-                    </template>
-                </div>
-                <input type="file" name="dokumentasi_proyek" x-ref="dInput" @change="handleFile($event)" accept="image/*" class="hidden">
-                <p x-text="fileName" class="text-xs text-gray-400 mt-2 text-center truncate"></p>
-                @error('dokumentasi_proyek') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+            <div class="mb-5">
+                <x-file-dropzone
+                    name="dokumentasi_proyek"
+                    label="Dokumentasi Proyek"
+                    accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+                    hint="JPG, PNG, WEBP, HEIC (max 10MB)"
+                    :is-image="true"
+                    color="primary"
+                    error="dokumentasi_proyek"
+                />
             </div>
 
             <div class="flex items-center gap-3">
@@ -108,18 +100,6 @@
 @endsection
 
 @push('scripts')
-<script>
-function imagePreview() {
-    return {
-        previewUrl: null, fileName: '',
-        handleFile(e) {
-            const f = e.target.files[0]; if (!f) return;
-            this.fileName = f.name;
-            const r = new FileReader(); r.onload = e => this.previewUrl = e.target.result; r.readAsDataURL(f);
-        }
-    }
-}
-</script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://npmcdn.com/flatpickr/dist/l10n/id.js"></script>
 <script>

@@ -71,68 +71,53 @@
         <div class="space-y-5">
 
             {{-- Gambar --}}
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5"
-                 x-data="{ previewUrl: '{{ $produk->gambar_url }}', fileName: '' }">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5">
                 <h3 class="font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
                     <i data-lucide="image" class="w-4 h-4 text-primary dark:text-amber-200"></i> Gambar Produk
                 </h3>
-                <div class="border-2 border-dashed border-gray-200 dark:border-gray-600 rounded-xl p-4 text-center cursor-pointer hover:border-primary transition-colors"
-                     @click="$refs.gInput.click()">
-                    <template x-if="previewUrl">
-                        <img :src="previewUrl" class="w-full h-40 object-cover rounded-lg">
-                    </template>
-                    <template x-if="!previewUrl">
-                        <div><i data-lucide="upload-cloud" class="w-8 h-8 text-gray-300 mb-2"></i><p class="text-sm text-gray-400">Klik ganti gambar</p></div>
-                    </template>
-                </div>
-                <input type="file" name="gambar_produk" x-ref="gInput" accept="image/*" class="hidden"
-                    @change="const f=event.target.files[0];if(f){fileName=f.name;const r=new FileReader();r.onload=e=>previewUrl=e.target.result;r.readAsDataURL(f)}">
-                <p x-text="fileName || 'Kosongkan untuk mempertahankan gambar saat ini'" class="text-xs text-gray-400 mt-2 text-center truncate"></p>
+                <x-file-dropzone
+                    name="gambar_produk"
+                    label=""
+                    accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+                    hint="JPG, PNG, WEBP, HEIC (max 5MB) — kosongkan untuk pertahankan"
+                    :is-image="true"
+                    :preview-url="$produk->gambar_url"
+                    color="primary"
+                />
             </div>
 
             {{-- File 2D --}}
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5"
-                 x-data="{ fileName: '' }">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5">
                 <h3 class="font-semibold text-gray-800 dark:text-white mb-3 flex items-center gap-2">
                     <i data-lucide="layout" class="w-4 h-4 text-blue-500"></i> Desain 2D
                 </h3>
-                @if($produk->desain_produk_2d)
-                    <div class="flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-2 mb-2">
-                        <i data-lucide="file-text" class="w-4 h-4 text-blue-500 dark:text-blue-400"></i>
-                        <span class="text-xs text-blue-600 dark:text-blue-300 truncate">{{ basename($produk->desain_produk_2d) }}</span>
-                        <a href="{{ $produk->desain2d_url }}" target="_blank" class="ml-auto text-xs text-blue-500 dark:text-blue-400 hover:underline">Lihat</a>
-                    </div>
-                @endif
-                <div class="border-2 border-dashed border-gray-200 dark:border-gray-600 rounded-xl p-3 text-center cursor-pointer hover:border-blue-400 transition-colors"
-                     @click="$refs.f2dI.click()">
-                    <p class="text-sm text-gray-400">Ganti File 2D</p>
-                </div>
-                <input type="file" name="desain_produk_2d" x-ref="f2dI" accept=".pdf,.dwg,.jpg,.jpeg,.png,.zip" class="hidden"
-                    @change="const f=event.target.files[0];if(f) fileName=f.name">
-                <p x-text="fileName" class="text-xs text-gray-400 mt-1 text-center truncate"></p>
+                <x-file-dropzone
+                    name="desain_produk_2d"
+                    label=""
+                    accept=".pdf,.dwg,.jpg,.jpeg,.png,.zip"
+                    hint="PDF, DWG, PNG, ZIP (max 50MB) — kosongkan untuk pertahankan"
+                    :is-image="false"
+                    :existing-name="$produk->desain_produk_2d ? basename($produk->desain_produk_2d) : null"
+                    :existing-url="$produk->desain_produk_2d ? $produk->desain2d_url : null"
+                    color="blue"
+                />
             </div>
 
             {{-- File 3D --}}
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5"
-                 x-data="{ fileName: '' }">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5">
                 <h3 class="font-semibold text-gray-800 dark:text-white mb-3 flex items-center gap-2">
                     <i data-lucide="box" class="w-4 h-4 text-purple-500"></i> Desain 3D
                 </h3>
-                @if($produk->desain_produk_3d)
-                    <div class="flex items-center gap-2 bg-purple-50 dark:bg-purple-900/20 rounded-lg p-2 mb-2">
-                        <i data-lucide="box" class="w-4 h-4 text-purple-500 dark:text-purple-400"></i>
-                        <span class="text-xs text-purple-600 dark:text-purple-300 truncate">{{ basename($produk->desain_produk_3d) }}</span>
-                        <a href="{{ $produk->desain3d_url }}" target="_blank" class="ml-auto text-xs text-purple-500 dark:text-purple-400 hover:underline">Lihat</a>
-                    </div>
-                @endif
-                <div class="border-2 border-dashed border-gray-200 dark:border-gray-600 rounded-xl p-3 text-center cursor-pointer hover:border-purple-400 transition-colors"
-                     @click="$refs.f3dI.click()">
-                    <p class="text-sm text-gray-400">Ganti File 3D</p>
-                    <p class="text-xs text-gray-300 mt-1">PDF, DWG, SKP, OBJ, GLB, ZIP (max 50MB)</p>
-                </div>
-                <input type="file" name="desain_produk_3d" x-ref="f3dI" accept=".pdf,.dwg,.skp,.3ds,.obj,.fbx,.zip,.glb,.gltf" class="hidden"
-                    @change="const f=event.target.files[0];if(f) fileName=f.name">
-                <p x-text="fileName" class="text-xs text-gray-400 mt-1 text-center truncate"></p>
+                <x-file-dropzone
+                    name="desain_produk_3d"
+                    label=""
+                    accept=".pdf,.dwg,.skp,.3ds,.obj,.fbx,.zip,.glb,.gltf"
+                    hint="PDF, DWG, SKP, OBJ, GLB, ZIP (max 50MB) — kosongkan untuk pertahankan"
+                    :is-image="false"
+                    :existing-name="$produk->desain_produk_3d ? basename($produk->desain_produk_3d) : null"
+                    :existing-url="$produk->desain_produk_3d ? $produk->desain3d_url : null"
+                    color="purple"
+                />
             </div>
 
             <div class="flex gap-3">

@@ -43,42 +43,17 @@
             </div>
 
             {{-- Background Image --}}
-            <div class="mb-6" x-data="{ previewUrl: '{{ $beranda->background_url }}', fileName: '' }">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Background Beranda
-                </label>
-
-                @if($beranda->background)
-                    <div class="mb-3 rounded-xl overflow-hidden relative">
-                        <img :src="previewUrl" src="{{ $beranda->background_url }}" alt="Current Background"
-                             class="w-full h-48 object-cover">
-                        <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity rounded-xl cursor-pointer"
-                             @click="$refs.bgInput.click()">
-                            <span class="text-white text-sm font-medium bg-black/50 px-4 py-2 rounded-lg">
-                                <i data-lucide="camera" class="w-4 h-4 mr-1"></i> Ganti Background
-                            </span>
-                        </div>
-                    </div>
-                @endif
-
-                <div class="border-2 border-dashed border-gray-200 dark:border-gray-600 rounded-xl p-5 text-center cursor-pointer hover:border-primary transition-colors {{ $beranda->background ? 'hidden' : '' }}"
-                     id="bgDropArea"
-                     @click="$refs.bgInput.click()">
-                    <i data-lucide="image" class="w-8 h-8 text-gray-300 mb-2"></i>
-                    <p class="text-sm text-gray-400">Upload gambar background</p>
-                    <p class="text-xs text-gray-300 mt-1">JPG, PNG, WEBP (max 10MB)</p>
-                </div>
-
-                <input type="file" name="background" x-ref="bgInput" @change="
-                    const f = event.target.files[0];
-                    if (f) {
-                        fileName = f.name;
-                        const r = new FileReader();
-                        r.onload = e => previewUrl = e.target.result;
-                        r.readAsDataURL(f);
-                    }" accept="image/*" class="hidden">
-                <p x-text="fileName" class="text-xs text-gray-400 mt-2 truncate text-center"></p>
-                @error('background') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+            <div class="mb-6">
+                <x-file-dropzone
+                    name="background"
+                    label="Background Beranda"
+                    accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+                    hint="JPG, PNG, WEBP, HEIC (max 10MB) — kosongkan untuk pertahankan"
+                    :is-image="true"
+                    :preview-url="$beranda->background_url"
+                    color="primary"
+                    error="background"
+                />
             </div>
 
             <div class="flex items-center gap-3">

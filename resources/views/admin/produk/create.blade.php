@@ -86,71 +86,48 @@
         <div class="space-y-5">
 
             {{-- Gambar Produk --}}
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5"
-                 x-data="imagePreview()">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5">
                 <h3 class="font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
                     <i data-lucide="image" class="w-4 h-4 text-primary dark:text-amber-200"></i> Gambar Produk
                 </h3>
-
-                <div class="border-2 border-dashed border-gray-200 dark:border-gray-600 rounded-xl p-4 text-center cursor-pointer hover:border-primary transition-colors"
-                     @click="$refs.gambarInput.click()">
-                    <template x-if="!previewUrl">
-                        <div>
-                            <i data-lucide="upload-cloud" class="w-8 h-8 text-gray-300 mb-2"></i>
-                            <p class="text-sm text-gray-400">Klik untuk upload gambar</p>
-                            <p class="text-xs text-gray-300 mt-1">JPG, PNG, WEBP (max 5MB)</p>
-                        </div>
-                    </template>
-                    <template x-if="previewUrl">
-                        <img :src="previewUrl" class="w-full h-40 object-cover rounded-lg">
-                    </template>
-                </div>
-                <input type="file" name="gambar_produk" x-ref="gambarInput" @change="handleFile($event)"
-                       accept="image/jpeg,image/png,image/webp" class="hidden">
-                <p x-text="fileName" class="text-xs text-gray-400 mt-2 text-center truncate"></p>
-                @error('gambar_produk')
-                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                @enderror
+                <x-file-dropzone
+                    name="gambar_produk"
+                    label=""
+                    accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+                    hint="JPG, PNG, WEBP, HEIC (max 5MB)"
+                    :is-image="true"
+                    color="primary"
+                />
             </div>
 
             {{-- File 2D --}}
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5"
-                 x-data="fileUpload()">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5">
                 <h3 class="font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
                     <i data-lucide="layout" class="w-4 h-4 text-blue-500"></i> Desain 2D
                 </h3>
-                <div class="border-2 border-dashed border-gray-200 dark:border-gray-600 rounded-xl p-4 text-center cursor-pointer hover:border-blue-400 transition-colors"
-                     @click="$refs.file2dInput.click()">
-                    <i data-lucide="file-text" class="w-8 h-8 text-gray-300 mb-2"></i>
-                    <p class="text-sm text-gray-400">Upload File 2D</p>
-                    <p class="text-xs text-gray-300 mt-1">PDF, DWG, PNG, ZIP (max 50MB)</p>
-                </div>
-                <input type="file" name="desain_produk_2d" x-ref="file2dInput" @change="setFileName($event)"
-                       accept=".pdf,.dwg,.jpg,.jpeg,.png,.zip" class="hidden">
-                <p x-text="fileName" class="text-xs text-gray-400 mt-2 text-center truncate"></p>
-                @error('desain_produk_2d')
-                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                @enderror
+                <x-file-dropzone
+                    name="desain_produk_2d"
+                    label=""
+                    accept=".pdf,.dwg,.jpg,.jpeg,.png,.zip"
+                    hint="PDF, DWG, PNG, ZIP (max 50MB)"
+                    :is-image="false"
+                    color="blue"
+                />
             </div>
 
             {{-- File 3D --}}
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5"
-                 x-data="fileUpload()">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5">
                 <h3 class="font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
                     <i data-lucide="box" class="w-4 h-4 text-purple-500"></i> Desain 3D
                 </h3>
-                <div class="border-2 border-dashed border-gray-200 dark:border-gray-600 rounded-xl p-4 text-center cursor-pointer hover:border-purple-400 transition-colors"
-                     @click="$refs.file3dInput.click()">
-                    <i data-lucide="box" class="w-8 h-8 text-gray-300 mb-2"></i>
-                    <p class="text-sm text-gray-400">Upload File 3D</p>
-                    <p class="text-xs text-gray-300 mt-1">PDF, DWG, SKP, OBJ, GLB, ZIP (max 50MB)</p>
-                </div>
-                <input type="file" name="desain_produk_3d" x-ref="file3dInput" @change="setFileName($event)"
-                       accept=".pdf,.dwg,.skp,.3ds,.obj,.fbx,.zip,.glb,.gltf" class="hidden">
-                <p x-text="fileName" class="text-xs text-gray-400 mt-2 text-center truncate"></p>
-                @error('desain_produk_3d')
-                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                @enderror
+                <x-file-dropzone
+                    name="desain_produk_3d"
+                    label=""
+                    accept=".pdf,.dwg,.skp,.3ds,.obj,.fbx,.zip,.glb,.gltf"
+                    hint="PDF, DWG, SKP, OBJ, GLB, ZIP (max 50MB)"
+                    :is-image="false"
+                    color="purple"
+                />
             </div>
 
             {{-- Actions --}}
@@ -168,31 +145,3 @@
     </div>
 </form>
 @endsection
-
-@push('scripts')
-<script>
-function imagePreview() {
-    return {
-        previewUrl: null,
-        fileName: '',
-        handleFile(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            this.fileName = file.name;
-            const reader = new FileReader();
-            reader.onload = (e) => { this.previewUrl = e.target.result; };
-            reader.readAsDataURL(file);
-        }
-    }
-}
-function fileUpload() {
-    return {
-        fileName: '',
-        setFileName(e) {
-            const file = e.target.files[0];
-            if (file) this.fileName = file.name;
-        }
-    }
-}
-</script>
-@endpush
