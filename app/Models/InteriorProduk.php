@@ -60,7 +60,61 @@ class InteriorProduk extends Model
 
     public function getDesain2dUrlAttribute(): ?string
     {
-        return $this->desain_produk_2d ? asset('storage/'.$this->desain_produk_2d) : null;
+        if (!$this->desain_produk_2d) return null;
+        
+        $val = trim($this->desain_produk_2d);
+        if (str_starts_with($val, '[') && str_ends_with($val, ']')) {
+            $decoded = json_decode($val, true);
+            if (is_array($decoded)) {
+                $urls = array_map(function($path) {
+                    return asset('storage/'.$path);
+                }, $decoded);
+                return implode(',', $urls);
+            }
+        }
+        
+        if (str_contains($val, ',')) {
+            $paths = array_filter(array_map('trim', explode(',', $val)));
+            $urls = array_map(function($path) {
+                return asset('storage/'.$path);
+            }, $paths);
+            return implode(',', $urls);
+        }
+        
+        return asset('storage/'.$this->desain_produk_2d);
+    }
+
+    public function getDesain2dFilesAttribute(): array
+    {
+        if (!$this->desain_produk_2d) return [];
+        
+        $val = trim($this->desain_produk_2d);
+        if (str_starts_with($val, '[') && str_ends_with($val, ']')) {
+            $decoded = json_decode($val, true);
+            if (is_array($decoded)) {
+                return array_map(function($path) {
+                    return [
+                        'name' => basename($path),
+                        'url' => asset('storage/'.$path)
+                    ];
+                }, $decoded);
+            }
+        }
+        
+        if (str_contains($val, ',')) {
+            $paths = array_filter(array_map('trim', explode(',', $val)));
+            return array_map(function($path) {
+                return [
+                    'name' => basename($path),
+                    'url' => asset('storage/'.$path)
+                ];
+            }, $paths);
+        }
+
+        return [[
+            'name' => basename($this->desain_produk_2d),
+            'url' => asset('storage/'.$this->desain_produk_2d)
+        ]];
     }
 
     public function getHargaFormatAttribute(): string

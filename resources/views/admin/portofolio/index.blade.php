@@ -26,29 +26,31 @@
     {{-- Grid Cards --}}
     <div class="p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         @forelse($portofolio as $item)
-            <div class="bg-white dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+            <div class="bg-white dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
                 {{-- Dokumentasi --}}
                 @if($item->dokumentasi_proyek)
                     <img src="{{ $item->dokumentasi_url }}" alt="{{ $item->nama_proyek }}"
-                         class="w-full h-44 object-cover">
+                         class="w-full h-44 object-cover flex-shrink-0">
                 @else
-                    <div class="w-full h-44 bg-accent dark:bg-gray-600 flex items-center justify-center">
+                    <div class="w-full h-44 bg-accent dark:bg-gray-600 flex items-center justify-center flex-shrink-0">
                         <i data-lucide="building" class="w-8 h-8 text-gray-300"></i>
                     </div>
                 @endif
 
-                <div class="p-4">
-                    <h4 class="font-semibold text-gray-800 dark:text-white mb-1">{{ $item->nama_proyek }}</h4>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1 mb-1">
-                        <i data-lucide="map-pin" class="w-4 h-4 text-primary dark:text-amber-200"></i> {{ $item->lokasi }}
-                    </p>
-                    @if($item->waktu_proyek)
-                        <p class="text-xs text-gray-400 flex items-center gap-1 mb-3">
-                            <i data-lucide="calendar" class="w-4 h-4 text-gray-300 dark:text-gray-500"></i> {{ $item->waktu_proyek }}
+                <div class="p-4 flex flex-col flex-grow">
+                    <div class="flex-grow mb-4">
+                        <h4 class="font-semibold text-gray-800 dark:text-white mb-1 line-clamp-2" title="{{ $item->nama_proyek }}">{{ $item->nama_proyek }}</h4>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1.5 mb-1.5">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-primary dark:text-amber-200"></i> {{ $item->lokasi }}
                         </p>
-                    @endif
+                        @if($item->waktu_proyek)
+                            <p class="text-xs text-gray-400 flex items-center gap-1.5">
+                                <i data-lucide="calendar" class="w-4 h-4 text-gray-300 dark:text-gray-500"></i> {{ $item->waktu_proyek }}
+                            </p>
+                        @endif
+                    </div>
 
-                    <div class="flex items-center gap-2 pt-3 border-t border-gray-100 dark:border-gray-600">
+                    <div class="flex items-center gap-2 pt-3 border-t border-gray-100 dark:border-gray-600 mt-auto">
                         <a href="{{ route('admin.portofolio.show', $item) }}"
                            class="flex-1 text-center text-xs bg-blue-50 hover:bg-blue-100 text-blue-600 dark:bg-blue-950/40 dark:hover:bg-blue-900/60 dark:text-blue-400 py-1.5 rounded-lg transition-colors">
                             <i data-lucide="eye" class="w-4 h-4 mr-1"></i> Detail
@@ -57,7 +59,7 @@
                            class="flex-1 text-center text-xs bg-amber-50 hover:bg-amber-100 text-amber-600 dark:bg-amber-950/40 dark:hover:bg-amber-900/60 dark:text-amber-400 py-1.5 rounded-lg transition-colors">
                             <i data-lucide="pencil" class="w-4 h-4 mr-1"></i> Edit
                         </a>
-                        <form id="del-porto-{{ $item->id }}" method="POST" action="{{ route('admin.portofolio.destroy', $item) }}">
+                        <form id="del-porto-{{ $item->id }}" method="POST" action="{{ route('admin.portofolio.destroy', $item) }}" class="inline-block">
                             @csrf @method('DELETE')
                             <button type="button" onclick="confirmDelete('del-porto-{{ $item->id }}', '{{ $item->nama_proyek }}')"
                                 class="text-xs bg-red-50 hover:bg-red-100 text-red-500 dark:bg-red-950/40 dark:hover:bg-red-900/60 dark:text-red-400 py-1.5 px-2 rounded-lg transition-colors">
