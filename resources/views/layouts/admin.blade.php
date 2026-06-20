@@ -32,7 +32,7 @@
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@7.3.0/dist/turbo.es2017-umd.js"></script>
@@ -95,6 +95,23 @@
         /* Table row hover */
         tbody tr:hover { background-color: rgba(245,240,230,0.5); }
         .dark tbody tr:hover { background-color: rgba(71,36,4,0.2); }
+
+        /* Smooth Page Transition */
+        main {
+            transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .turbo-loading main {
+            opacity: 0;
+            transform: translateY(4px);
+        }
+
+        /* Turbo Progress Bar Customization */
+        .turbo-progress-bar {
+            background-color: #fca311 !important;
+            height: 3px !important;
+        }
     </style>
 
     @stack('styles')
@@ -228,20 +245,136 @@ function confirmDelete(formId, itemName = 'item ini') {
         reverseButtons: true,
     }).then((result) => {
         if (result.isConfirmed) {
-            document.getElementById(formId).submit();
+            const form = document.getElementById(formId);
+            if (!form) return;
+
+            // Show loading state
+            Swal.fire({
+                title: 'Menghapus...',
+                text: 'Mohon tunggu sebentar.',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            // Submit form via fetch
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: `${itemName} telah berhasil dihapus.`,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                        toast: true,
+                        position: 'top-end',
+                    });
+                    
+                    // Check if we are on a detail page and need to redirect
+                    const isDetailPage = form.id === 'del-porto-show' || form.id === 'delete-show';
+                    if (isDetailPage) {
+                        setTimeout(() => {
+                            let redirectUrl = '/admin';
+                            if (window.location.pathname.includes('/admin/portofolio')) {
+                                redirectUrl = '/admin/portofolio';
+                            } else if (window.location.pathname.includes('/admin/produk')) {
+                                redirectUrl = '/admin/produk';
+                            } else if (window.location.pathname.includes('/admin/kategori')) {
+                                redirectUrl = '/admin/kategori';
+                            } else if (window.location.pathname.includes('/admin/pesan')) {
+                                redirectUrl = '/admin/pesan';
+                            }
+                            if (window.Turbo) {
+                                window.Turbo.visit(redirectUrl);
+                            } else {
+                                window.location.href = redirectUrl;
+                            }
+                        }, 1000);
+                        return;
+                    }
+
+                    // Smoothly remove the parent card/row from the DOM
+                    const card = form.closest('.grid > div, tbody > tr');
+                    if (card) {
+                        card.style.transition = 'all 0.5s ease-out';
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            card.remove();
+                            // If this was the last item, reload to show empty state
+                            const siblings = card.parentNode.children;
+                            if (siblings.length === 0 || (siblings.length === 1 && siblings[0] === card)) {
+                                if (window.Turbo) {
+                                    window.Turbo.visit(window.location.href, { action: 'replace' });
+                                } else {
+                                    window.location.reload();
+                                }
+                            }
+                        }, 500);
+                    } else {
+                        // Fallback: reload page
+                        if (window.Turbo) {
+                            window.Turbo.visit(window.location.href, { action: 'replace' });
+                        } else {
+                            window.location.reload();
+                        }
+                    }
+                } else {
+                    throw new Error('Gagal menghapus data.');
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal!',
+                    text: error.message || 'Terjadi kesalahan saat menghapus data.',
+                    confirmButtonColor: '#472404',
+                });
+            });
         }
     });
 }
 </script>
 
 <script>
-    // Jalankan sekali saat DOM siap atau via Turbo load
+    // Handle smooth page transitions with Turbo
+    document.addEventListener('turbo:click', () => {
+        document.documentElement.classList.add('turbo-loading');
+    });
+    
+    document.addEventListener('turbo:submit-start', (event) => {
+        document.documentElement.classList.add('turbo-loading');
+        
+        // Find any submit button in the form and add loading state
+        const form = event.target;
+        const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Memproses...`;
+        }
+    });
+
+    // Jalankan sekali saat DOM siap or via Turbo load
     const initLucide = () => {
-        lucide.createIcons();
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
     };
     
     document.addEventListener('DOMContentLoaded', initLucide);
-    document.addEventListener('turbo:load', initLucide);
+    document.addEventListener('turbo:load', () => {
+        document.documentElement.classList.remove('turbo-loading');
+        initLucide();
+    });
     document.addEventListener('alpine:initialized', initLucide);
 </script>
 

@@ -34,18 +34,20 @@
         <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-5">
             <h3 class="font-semibold text-gray-800 dark:text-white mb-3">File Desain</h3>
             <div class="space-y-2">
-                @if($produk->desain_produk_2d)
-                    <a href="{{ $produk->desain2d_url }}" target="_blank"
-                       class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-950/40 rounded-xl hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors">
-                        <div class="w-9 h-9 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                            <i data-lucide="layout" class="w-4 h-4 text-blue-500"></i>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <p class="text-sm font-medium text-blue-700 dark:text-blue-300">File Desain 2D</p>
-                            <p class="text-xs text-gray-400 truncate">{{ basename($produk->desain_produk_2d) }}</p>
-                        </div>
-                        <i data-lucide="download" class="w-4 h-4 text-blue-500"></i>
-                    </a>
+                @if(!empty($produk->desain2d_files))
+                    @foreach($produk->desain2d_files as $idx => $file)
+                        <a href="{{ $file['url'] }}" target="_blank"
+                           class="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-950/40 rounded-xl hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors">
+                            <div class="w-9 h-9 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                                <i data-lucide="layout" class="w-4 h-4 text-blue-500"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-blue-700 dark:text-blue-300">File Desain 2D #{{ $idx + 1 }}</p>
+                                <p class="text-xs text-gray-400 truncate">{{ $file['name'] }}</p>
+                            </div>
+                            <i data-lucide="download" class="w-4 h-4 text-blue-500"></i>
+                        </a>
+                    @endforeach
                 @endif
                 @if($produk->desain_produk_3d)
                     <a href="{{ $produk->desain3d_url }}" target="_blank"
@@ -68,24 +70,34 @@
 
         {{-- Preview 2D --}}
         @php
-            $ext2d = $produk->desain_produk_2d ? strtolower(pathinfo($produk->desain_produk_2d, PATHINFO_EXTENSION)) : '';
-            $is2dPreviewable = in_array($ext2d, ['jpg', 'jpeg', 'png', 'webp', 'pdf']);
+            $previewableFiles = array_filter($produk->desain2d_files, function($file) {
+                $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                return in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'pdf']);
+            });
         @endphp
 
-        @if($is2dPreviewable)
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden flex flex-col">
-            <div class="p-4 border-b border-gray-100 dark:border-gray-700 flex items-center gap-2">
-                <i data-lucide="layout" class="w-5 h-5 text-blue-500"></i>
-                <h3 class="font-semibold text-gray-800 dark:text-white text-sm">Preview 2D</h3>
-            </div>
-            <div class="w-full h-64 bg-gray-50 dark:bg-gray-900 relative flex-1">
-                @if($ext2d === 'pdf')
-                    <iframe src="{{ $produk->desain2d_url }}" class="w-full h-full border-none"></iframe>
-                @else
-                    <img src="{{ $produk->desain2d_url }}" alt="2D Preview" class="w-full h-full object-contain p-4">
-                @endif
-            </div>
-        </div>
+        @if(!empty($previewableFiles))
+            @foreach($previewableFiles as $idx => $file)
+                @php
+                    $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                @endphp
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden flex flex-col mb-4">
+                    <div class="p-4 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="layout" class="w-5 h-5 text-blue-500"></i>
+                            <h3 class="font-semibold text-gray-800 dark:text-white text-sm">Preview 2D #{{ $idx + 1 }}</h3>
+                        </div>
+                        <span class="text-xs text-gray-400 truncate max-w-[150px] sm:max-w-xs">{{ $file['name'] }}</span>
+                    </div>
+                    <div class="w-full h-64 bg-gray-50 dark:bg-gray-900 relative flex-1">
+                        @if($ext === 'pdf')
+                            <iframe src="{{ $file['url'] }}" class="w-full h-full border-none"></iframe>
+                        @else
+                            <img src="{{ $file['url'] }}" alt="2D Preview" class="w-full h-full object-contain p-4">
+                        @endif
+                    </div>
+                </div>
+            @endforeach
         @endif
 
     </div>

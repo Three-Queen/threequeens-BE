@@ -83,9 +83,19 @@ class ProdukController extends Controller
 
         // Upload desain 2D
         if ($request->hasFile('desain_produk_2d')) {
-            $file = $request->file('desain_produk_2d');
-            $filename = pathinfo($file->hashName(), PATHINFO_FILENAME).'.'.$file->getClientOriginalExtension();
-            $data['desain_produk_2d'] = $file->storeAs('produk/2d', $filename, 'public');
+            $files = $request->file('desain_produk_2d');
+            if (is_array($files)) {
+                $storedPaths = [];
+                foreach ($files as $file) {
+                    $filename = pathinfo($file->hashName(), PATHINFO_FILENAME).'.'.$file->getClientOriginalExtension();
+                    $storedPaths[] = $file->storeAs('produk/2d', $filename, 'public');
+                }
+                $data['desain_produk_2d'] = json_encode($storedPaths);
+            } else {
+                $file = $files;
+                $filename = pathinfo($file->hashName(), PATHINFO_FILENAME).'.'.$file->getClientOriginalExtension();
+                $data['desain_produk_2d'] = $file->storeAs('produk/2d', $filename, 'public');
+            }
         }
 
         InteriorProduk::create($data);
@@ -153,11 +163,32 @@ class ProdukController extends Controller
         // Upload desain 2D
         if ($request->hasFile('desain_produk_2d')) {
             if ($produk->desain_produk_2d) {
-                StorageHelper::deleteSafe($produk->desain_produk_2d);
+                $oldVal = trim($produk->desain_produk_2d);
+                if (str_starts_with($oldVal, '[') && str_ends_with($oldVal, ']')) {
+                    $oldPaths = json_decode($oldVal, true);
+                    if (is_array($oldPaths)) {
+                        foreach ($oldPaths as $oldPath) {
+                            StorageHelper::deleteSafe($oldPath);
+                        }
+                    }
+                } else {
+                    StorageHelper::deleteSafe($produk->desain_produk_2d);
+                }
             }
-            $file = $request->file('desain_produk_2d');
-            $filename = pathinfo($file->hashName(), PATHINFO_FILENAME).'.'.$file->getClientOriginalExtension();
-            $data['desain_produk_2d'] = $file->storeAs('produk/2d', $filename, 'public');
+            
+            $files = $request->file('desain_produk_2d');
+            if (is_array($files)) {
+                $storedPaths = [];
+                foreach ($files as $file) {
+                    $filename = pathinfo($file->hashName(), PATHINFO_FILENAME).'.'.$file->getClientOriginalExtension();
+                    $storedPaths[] = $file->storeAs('produk/2d', $filename, 'public');
+                }
+                $data['desain_produk_2d'] = json_encode($storedPaths);
+            } else {
+                $file = $files;
+                $filename = pathinfo($file->hashName(), PATHINFO_FILENAME).'.'.$file->getClientOriginalExtension();
+                $data['desain_produk_2d'] = $file->storeAs('produk/2d', $filename, 'public');
+            }
         } else {
             unset($data['desain_produk_2d']);
         }
@@ -178,7 +209,17 @@ class ProdukController extends Controller
             StorageHelper::deleteSafe($produk->desain_produk_3d);
         }
         if ($produk->desain_produk_2d) {
-            StorageHelper::deleteSafe($produk->desain_produk_2d);
+            $val = trim($produk->desain_produk_2d);
+            if (str_starts_with($val, '[') && str_ends_with($val, ']')) {
+                $paths = json_decode($val, true);
+                if (is_array($paths)) {
+                    foreach ($paths as $path) {
+                        StorageHelper::deleteSafe($path);
+                    }
+                }
+            } else {
+                StorageHelper::deleteSafe($produk->desain_produk_2d);
+            }
         }
 
         $produk->delete();

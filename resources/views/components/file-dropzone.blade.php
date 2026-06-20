@@ -18,6 +18,8 @@
     $previewUrl   = $previewUrl   ?? null;
     $existingName = $existingName ?? null;
     $existingUrl  = $existingUrl  ?? null;
+    $existingFiles = $existingFiles ?? [];
+    $multiple     = $multiple     ?? false;
     $accept       = $accept       ?? 'image/*';
     $hint         = $hint         ?? 'JPG, PNG, WEBP, HEIC (max 5MB)';
     $color        = $color        ?? 'primary';
@@ -56,17 +58,32 @@
         fileName: '',
         isDragging: false,
         handleFiles(files) {
-            const file = files[0];
-            if (!file) return;
-            this.fileName = file.name;
-            @if($isImage)
-            const reader = new FileReader();
-            reader.onload = (e) => { this.previewUrl = e.target.result; };
-            reader.readAsDataURL(file);
+            if (files.length === 0) return;
+            @if($multiple)
+                let names = [];
+                for (let i = 0; i < files.length; i++) {
+                    names.push(files[i].name);
+                }
+                this.fileName = names.join(', ');
+                
+                const dt = new DataTransfer();
+                for (let i = 0; i < files.length; i++) {
+                    dt.items.add(files[i]);
+                }
+                this.$refs.fileInput.files = dt.files;
+            @else
+                const file = files[0];
+                if (!file) return;
+                this.fileName = file.name;
+                @if($isImage)
+                const reader = new FileReader();
+                reader.onload = (e) => { this.previewUrl = e.target.result; };
+                reader.readAsDataURL(file);
+                @endif
+                const dt = new DataTransfer();
+                dt.items.add(file);
+                this.$refs.fileInput.files = dt.files;
             @endif
-            const dt = new DataTransfer();
-            dt.items.add(file);
-            this.$refs.fileInput.files = dt.files;
         },
         onDrop(e) {
             this.isDragging = false;
@@ -86,18 +103,29 @@
     </label>
     @endif
 
-    {{-- Existing non-image file badge --}}
-    @if(!$isImage && $existingName)
-    <div class="flex items-center gap-2 rounded-lg p-2 mb-2 {{ $badgeBg }}">
-        {{-- File icon SVG --}}
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0 {{ $iconColorClass }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-        </svg>
-        <span class="text-xs truncate flex-1">{{ $existingName }}</span>
-        @if($existingUrl)
-        <a href="{{ $existingUrl }}" target="_blank" class="ml-auto text-xs {{ $badgeLinkColor }} hover:underline whitespace-nowrap">Lihat</a>
-        @endif
-    </div>
+    {{-- Existing non-image files badge --}}
+    @if(!$isImage && !empty($existingFiles))
+        @foreach($existingFiles as $file)
+        <div class="flex items-center gap-2 rounded-lg p-2 mb-2 {{ $badgeBg }}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0 {{ $iconColorClass }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <span class="text-xs truncate flex-1">{{ $file['name'] }}</span>
+            @if($file['url'])
+            <a href="{{ $file['url'] }}" target="_blank" class="ml-auto text-xs {{ $badgeLinkColor }} hover:underline whitespace-nowrap">Lihat</a>
+            @endif
+        </div>
+        @endforeach
+    @elseif(!$isImage && $existingName)
+        <div class="flex items-center gap-2 rounded-lg p-2 mb-2 {{ $badgeBg }}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0 {{ $iconColorClass }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <span class="text-xs truncate flex-1">{{ $existingName }}</span>
+            @if($existingUrl)
+            <a href="{{ $existingUrl }}" target="_blank" class="ml-auto text-xs {{ $badgeLinkColor }} hover:underline whitespace-nowrap">Lihat</a>
+            @endif
+        </div>
     @endif
 
     {{-- Drop Zone --}}
@@ -201,6 +229,7 @@
         x-ref="fileInput"
         accept="{{ $accept }}"
         class="hidden"
+        @if($multiple) multiple @endif
         @change="handleFiles($event.target.files)"
     >
 

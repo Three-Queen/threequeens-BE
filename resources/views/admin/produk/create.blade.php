@@ -116,12 +116,14 @@
                     <i data-lucide="layout" class="w-4 h-4 text-blue-500"></i> Desain 2D
                 </h3>
                 <x-file-dropzone
-                    name="desain_produk_2d"
+                    name="desain_produk_2d[]"
                     label=""
                     accept=".pdf,.dwg,.jpg,.jpeg,.png,.zip"
-                    hint="PDF, DWG, PNG, ZIP (max 50MB)"
+                    hint="PDF, DWG, PNG, ZIP (max 50MB) — Bisa pilih lebih dari 1 file"
                     :is-image="false"
+                    :multiple="true"
                     color="blue"
+                    error="desain_produk_2d"
                 />
             </div>
 
