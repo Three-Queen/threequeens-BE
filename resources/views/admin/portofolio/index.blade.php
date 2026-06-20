@@ -68,9 +68,11 @@
                             <i data-lucide="pencil" class="w-4 h-4 mr-1"></i> Edit
                         </span>
                         @endif
-                        <form id="del-porto-{{ $item->id }}" method="POST" action="{{ route('admin.portofolio.destroy', $item) }}" class="inline-block">
+                        <form id="del-porto-{{ $item->id }}" method="POST"
+                              action="{{ $item->slug ? route('admin.portofolio.destroy', $item) : route('admin.portofolio.destroy.by_id', $item->id) }}"
+                              class="inline-block">
                             @csrf @method('DELETE')
-                            <button type="button" onclick="confirmDelete('del-porto-{{ $item->id }}', '{{ $item->nama_proyek }}')"
+                            <button type="button" onclick="confirmDelete('del-porto-{{ $item->id }}', '{{ addslashes($item->nama_proyek) }}')"
                                 class="text-xs bg-red-50 hover:bg-red-100 text-red-500 dark:bg-red-950/40 dark:hover:bg-red-900/60 dark:text-red-400 py-1.5 px-2 rounded-lg transition-colors">
                                 <i data-lucide="trash-2" class="w-4 h-4"></i>
                             </button>

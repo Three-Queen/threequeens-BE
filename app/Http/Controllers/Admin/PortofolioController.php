@@ -118,6 +118,27 @@ class PortofolioController extends Controller
             ->with('success', 'Project portofolio berhasil dihapus.');
     }
 
+    /**
+     * Hapus portofolio menggunakan ID integer (fallback saat slug masih null).
+     */
+    public function destroyById(int $id): RedirectResponse
+    {
+        $portofolio = PortofolioProyek::findOrFail($id);
+
+        if ($portofolio->dokumentasi_proyek) {
+            StorageHelper::deleteSafe($portofolio->dokumentasi_proyek);
+        }
+
+        foreach ($portofolio->galeri as $galeri) {
+            StorageHelper::deleteSafe($galeri->gambar_url);
+        }
+
+        $portofolio->delete();
+
+        return redirect()->route('admin.portofolio.index')
+            ->with('success', 'Project portofolio berhasil dihapus.');
+    }
+
     public function destroyGaleri($id): JsonResponse
     {
         $galeri = PortofolioGaleri::findOrFail($id);

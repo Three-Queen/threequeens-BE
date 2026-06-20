@@ -104,10 +104,10 @@
                                 </span>
                                 @endif
                                 <form id="delete-produk-{{ $item->id }}" method="POST"
-                                      action="{{ route('admin.produk.destroy', $item) }}">
+                                      action="{{ $item->kode_produk ? route('admin.produk.destroy', $item) : route('admin.produk.destroy.by_id', $item->id) }}">
                                     @csrf @method('DELETE')
                                     <button type="button"
-                                        onclick="confirmDelete('delete-produk-{{ $item->id }}', '{{ $item->nama_produk }}')"
+                                        onclick="confirmDelete('delete-produk-{{ $item->id }}', '{{ addslashes($item->nama_produk) }}')"
                                         class="w-8 h-8 flex items-center justify-center bg-red-50 hover:bg-red-100 text-red-500 dark:bg-red-950/40 dark:hover:bg-red-900/60 dark:text-red-400 rounded-lg transition-colors" title="Hapus">
                                         <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                                     </button>

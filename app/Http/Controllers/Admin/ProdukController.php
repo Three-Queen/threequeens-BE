@@ -227,4 +227,37 @@ class ProdukController extends Controller
         return redirect()->route('admin.produk.index')
             ->with('success', 'Produk berhasil dihapus.');
     }
+
+    /**
+     * Hapus produk menggunakan ID integer (fallback saat kode_produk masih null).
+     */
+    public function destroyById(int $id): RedirectResponse
+    {
+        $produk = InteriorProduk::findOrFail($id);
+
+        if ($produk->gambar_produk) {
+            StorageHelper::deleteSafe($produk->gambar_produk);
+        }
+        if ($produk->desain_produk_3d) {
+            StorageHelper::deleteSafe($produk->desain_produk_3d);
+        }
+        if ($produk->desain_produk_2d) {
+            $val = trim($produk->desain_produk_2d);
+            if (str_starts_with($val, '[') && str_ends_with($val, ']')) {
+                $paths = json_decode($val, true);
+                if (is_array($paths)) {
+                    foreach ($paths as $path) {
+                        StorageHelper::deleteSafe($path);
+                    }
+                }
+            } else {
+                StorageHelper::deleteSafe($produk->desain_produk_2d);
+            }
+        }
+
+        $produk->delete();
+
+        return redirect()->route('admin.produk.index')
+            ->with('success', 'Produk berhasil dihapus.');
+    }
 }

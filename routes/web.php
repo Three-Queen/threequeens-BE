@@ -39,10 +39,12 @@ Route::prefix('admin')
         Route::resource('kategori', KategoriController::class)->except(['show']);
 
         // Produk Interior
+        Route::delete('produk/{id}/force', [ProdukController::class, 'destroyById'])->name('produk.destroy.by_id');
         Route::resource('produk', ProdukController::class);
 
         // Portofolio Proyek
         Route::delete('portofolio/galeri/{id}', [PortofolioController::class, 'destroyGaleri'])->name('portofolio.galeri.destroy');
+        Route::delete('portofolio/{id}/force', [PortofolioController::class, 'destroyById'])->name('portofolio.destroy.by_id');
         Route::resource('portofolio', PortofolioController::class);
 
         // Manajemen Beranda
