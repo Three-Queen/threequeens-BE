@@ -44,10 +44,10 @@
             <div class="w-11 h-11 bg-blue-50 dark:bg-blue-900/20 rounded-xl flex items-center justify-center">
                 <i data-lucide="folder-open" class="w-5 h-5 text-blue-600 dark:text-blue-400"></i>
             </div>
-            <span class="text-xs text-gray-400 bg-gray-50 dark:bg-gray-700 px-2 py-1 rounded-full">Proyek</span>
+            <span class="text-xs text-gray-400 bg-gray-50 dark:bg-gray-700 px-2 py-1 rounded-full">Project</span>
         </div>
         <p class="text-3xl font-bold text-gray-800 dark:text-white">{{ $stats['total_portofolio'] }}</p>
-        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Proyek Portofolio</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Project Portofolio</p>
     </div>
 
     {{-- Total Pesan --}}

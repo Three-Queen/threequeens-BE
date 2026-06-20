@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit Proyek')
-@section('page-title', 'Edit Proyek Portofolio')
+@section('title', 'Edit Project')
+@section('page-title', 'Edit Project Portofolio')
 
 @push('styles')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -28,7 +28,7 @@
 <div class="w-full">
     <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
         <h3 class="font-semibold text-gray-800 dark:text-white mb-5 flex items-center gap-2">
-            <i data-lucide="pencil" class="w-4 h-4 text-primary"></i> Edit Proyek
+            <i data-lucide="pencil" class="w-4 h-4 text-primary"></i> Edit Project
         </h3>
 
         <form method="POST" action="{{ route('admin.portofolio.update', $portofolio) }}" enctype="multipart/form-data">
@@ -36,7 +36,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Nama Proyek <span class="text-red-500">*</span></label>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Nama Project <span class="text-red-500">*</span></label>
                     <input type="text" name="nama_proyek" value="{{ old('nama_proyek', $portofolio->nama_proyek) }}"
                         class="w-full px-4 py-3 border-2 rounded-xl text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 focus:outline-none focus:border-primary transition-colors @error('nama_proyek') border-red-400 @else border-gray-200 @enderror">
                     @error('nama_proyek') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
@@ -51,7 +51,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Kategori Proyek <span class="text-red-500">*</span></label>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Kategori Project <span class="text-red-500">*</span></label>
                     <select name="kategori_id" id="kategori_id" required
                         class="w-full text-sm">
                         <option value="">Pilih Kategori</option>
@@ -79,9 +79,9 @@
             </div>
 
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Deskripsi Proyek</label>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Deskripsi Project</label>
                 <textarea name="deskripsi" rows="4"
-                    placeholder="Ceritakan detail proyek, konsep desain, material yang digunakan, dsb..."
+                    placeholder="Ceritakan detail project, konsep desain, material yang digunakan, dsb..."
                     class="w-full px-4 py-3 border-2 rounded-xl text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 focus:outline-none focus:border-primary transition-colors border-gray-200 resize-none">{{ old('deskripsi', $portofolio->deskripsi) }}</textarea>
                 @error('deskripsi') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
@@ -93,7 +93,7 @@
             </div>
 
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Waktu Proyek</label>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Waktu Project</label>
                 <div class="relative">
                     <i data-lucide="calendar" class="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
                     <input type="date" name="waktu_proyek" value="{{ old('waktu_proyek', $portofolio->waktu_proyek) }}" placeholder="Pilih tanggal..."
@@ -113,7 +113,7 @@
             <div class="mb-5">
                 <x-file-dropzone
                     name="dokumentasi_proyek"
-                    label="Cover Proyek (Foto Utama)"
+                    label="Cover Project (Foto Utama)"
                     accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
                     hint="JPG, PNG, WEBP, HEIC (max 10MB) — kosongkan untuk pertahankan"
                     :is-image="true"

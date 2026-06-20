@@ -67,7 +67,7 @@
         <x-sidebar-item
             route="admin.portofolio.index"
             icon="folder-open"
-            label="Portofolio Proyek"
+            label="Portofolio Project"
         />
 
         {{-- Divider --}}

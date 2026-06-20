@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', $portofolio->nama_proyek)
-@section('page-title', 'Detail Proyek')
+@section('page-title', 'Detail Project')
 
 @section('breadcrumb')
     <span class="text-gray-400">/</span>
@@ -40,7 +40,7 @@
                         <i data-lucide="calendar" class="w-4 h-4 text-primary dark:text-amber-200"></i>
                     </div>
                     <div>
-                        <p class="text-[10px] uppercase tracking-wider text-gray-500 dark:text-gray-400 font-semibold mb-0.5">Waktu Proyek</p>
+                        <p class="text-[10px] uppercase tracking-wider text-gray-500 dark:text-gray-400 font-semibold mb-0.5">Waktu Project</p>
                         <p class="text-sm font-medium text-gray-800 dark:text-gray-200 line-clamp-1">
                             {{ $portofolio->waktu_proyek ? \Carbon\Carbon::parse($portofolio->waktu_proyek)->translatedFormat('d F Y') : '-' }}
                         </p>
@@ -80,7 +80,7 @@
 
             @if($portofolio->deskripsi)
             <div class="mt-8">
-                <h4 class="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-4 border-b border-gray-100 dark:border-gray-700 pb-2">Deskripsi Proyek</h4>
+                <h4 class="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-4 border-b border-gray-100 dark:border-gray-700 pb-2">Deskripsi Project</h4>
                 <div class="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
                     {!! nl2br(e($portofolio->deskripsi)) !!}
                 </div>
@@ -113,10 +113,17 @@
                                     <h5 class="font-semibold text-gray-800 dark:text-white mb-1 line-clamp-1">{{ $produk->nama_produk }}</h5>
                                     <p class="text-xs text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">{{ $produk->deskripsi_produk }}</p>
                                     <div class="mt-auto">
+                                        @if($produk->kode_produk)
                                         <a href="{{ route('admin.produk.show', $produk->kode_produk) }}" class="flex items-center justify-center gap-2 w-full py-2 bg-white hover:bg-gray-100 dark:bg-gray-600 dark:hover:bg-gray-500 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-xl text-xs font-medium transition-colors">
                                             <span>Detail Produk</span>
                                             <i data-lucide="arrow-right" class="w-3 h-3"></i>
                                         </a>
+                                        @else
+                                        <span class="flex items-center justify-center gap-2 w-full py-2 bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-400 dark:text-gray-500 rounded-xl text-xs font-medium cursor-not-allowed" title="Kode produk belum tersedia">
+                                            <span>Detail Produk</span>
+                                            <i data-lucide="alert-circle" class="w-3 h-3"></i>
+                                        </span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

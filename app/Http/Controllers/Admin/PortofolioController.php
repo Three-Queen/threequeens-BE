@@ -53,7 +53,7 @@ class PortofolioController extends Controller
         }
 
         return redirect()->route('admin.portofolio.index')
-            ->with('success', 'Proyek portofolio berhasil ditambahkan.');
+            ->with('success', 'Project portofolio berhasil ditambahkan.');
     }
 
     public function show(PortofolioProyek $portofolio): View
@@ -99,7 +99,7 @@ class PortofolioController extends Controller
         }
 
         return redirect()->route('admin.portofolio.index')
-            ->with('success', 'Proyek portofolio berhasil diperbarui.');
+            ->with('success', 'Project portofolio berhasil diperbarui.');
     }
 
     public function destroy(PortofolioProyek $portofolio): RedirectResponse
@@ -115,7 +115,7 @@ class PortofolioController extends Controller
         $portofolio->delete();
 
         return redirect()->route('admin.portofolio.index')
-            ->with('success', 'Proyek portofolio berhasil dihapus.');
+            ->with('success', 'Project portofolio berhasil dihapus.');
     }
 
     public function destroyGaleri($id): JsonResponse

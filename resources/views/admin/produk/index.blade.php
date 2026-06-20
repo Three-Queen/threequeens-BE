@@ -40,7 +40,13 @@
             <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
                 @forelse($produk as $i => $item)
                     <tr class="transition-colors">
-                        <td class="px-5 py-3 text-sm font-mono font-medium text-primary dark:text-amber-200">{{ $item->kode_produk }}</td>
+                        <td class="px-5 py-3 text-sm font-mono font-medium text-primary dark:text-amber-200">
+                            @if($item->kode_produk)
+                                {{ $item->kode_produk }}
+                            @else
+                                <span class="text-xs text-red-400 bg-red-50 dark:bg-red-950/40 px-2 py-0.5 rounded-full font-sans">Belum ada kode</span>
+                            @endif
+                        </td>
                         <td class="px-5 py-3">
                             <div class="flex items-center gap-3">
                                 @if($item->gambar_produk)
@@ -80,6 +86,7 @@
                         </td>
                         <td class="px-5 py-3">
                             <div class="flex items-center justify-center gap-2">
+                                @if($item->kode_produk)
                                 <a href="{{ route('admin.produk.show', $item) }}"
                                    class="w-8 h-8 flex items-center justify-center bg-blue-50 hover:bg-blue-100 text-blue-600 dark:bg-blue-950/40 dark:hover:bg-blue-900/60 dark:text-blue-400 rounded-lg transition-colors" title="Detail">
                                     <i data-lucide="eye" class="w-3.5 h-3.5"></i>
@@ -88,6 +95,14 @@
                                    class="w-8 h-8 flex items-center justify-center bg-amber-50 hover:bg-amber-100 text-amber-600 dark:bg-amber-950/40 dark:hover:bg-amber-900/60 dark:text-amber-400 rounded-lg transition-colors" title="Edit">
                                     <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
                                 </a>
+                                @else
+                                <span class="w-8 h-8 flex items-center justify-center bg-gray-50 dark:bg-gray-700 text-gray-300 dark:text-gray-600 rounded-lg cursor-not-allowed" title="Kode produk belum ada — tidak bisa diakses">
+                                    <i data-lucide="eye-off" class="w-3.5 h-3.5"></i>
+                                </span>
+                                <span class="w-8 h-8 flex items-center justify-center bg-gray-50 dark:bg-gray-700 text-gray-300 dark:text-gray-600 rounded-lg cursor-not-allowed" title="Edit tidak tersedia">
+                                    <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                                </span>
+                                @endif
                                 <form id="delete-produk-{{ $item->id }}" method="POST"
                                       action="{{ route('admin.produk.destroy', $item) }}">
                                     @csrf @method('DELETE')
