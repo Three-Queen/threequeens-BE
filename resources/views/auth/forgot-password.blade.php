@@ -70,7 +70,7 @@
                     </div>
                 @endif
 
-                <form method="POST" action="#">
+                <form method="POST" action="{{ route('password.email') }}">
                     @csrf
                     
                     {{-- Email --}}
@@ -89,7 +89,7 @@
                     </div>
 
                     {{-- Submit --}}
-                    <button type="button" onclick="alert('Fitur pengiriman email reset password sedang dalam tahap pengembangan.')"
+                    <button type="submit"
                         class="w-full bg-primary hover:bg-primary-dark text-white text-sm font-medium py-3 px-6 rounded-none transition-colors flex items-center justify-center gap-2 shadow-sm hover:shadow mb-4">
                         <i data-lucide="send" class="w-4 h-4"></i>
                         Kirim Link Reset Password
