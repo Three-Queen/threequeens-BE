@@ -16,6 +16,11 @@ class InteriorProduk extends Model
         'kode_produk',
         'nama_produk',
         'deskripsi_produk',
+        'panjang',
+        'lebar',
+        'tinggi',
+        'bahan',
+        'ketebalan',
         'harga_produk',
         'gambar_produk',
         'desain_produk_3d',
@@ -55,7 +60,29 @@ class InteriorProduk extends Model
 
     public function getDesain3dUrlAttribute(): ?string
     {
-        return $this->desain_produk_3d ? asset('storage/'.$this->desain_produk_3d) : null;
+        if (!$this->desain_produk_3d) return null;
+
+        // Jika tersimpan sebagai tag HTML <iframe ... src="URL" ...>, ekstrak URL-nya
+        if (preg_match('/src=["\']([^"\']+)["\']/i', $this->desain_produk_3d, $matches)) {
+            return $matches[1];
+        }
+
+        if (str_starts_with($this->desain_produk_3d, 'http://') || str_starts_with($this->desain_produk_3d, 'https://')) {
+            return $this->desain_produk_3d;
+        }
+
+        return asset('storage/'.$this->desain_produk_3d);
+    }
+
+    public function getDesain3dTypeAttribute(): ?string
+    {
+        if (!$this->desain_produk_3d) return null;
+
+        if (str_contains($this->desain_produk_3d, '<iframe') || str_starts_with($this->desain_produk_3d, 'http://') || str_starts_with($this->desain_produk_3d, 'https://')) {
+            return 'embed';
+        }
+
+        return 'file';
     }
 
     public function getDesain2dUrlAttribute(): ?string

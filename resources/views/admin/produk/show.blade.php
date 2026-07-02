@@ -131,6 +131,72 @@
                 </div>
             @endif
 
+            @php
+                $hasSpek = $produk->panjang || $produk->lebar || $produk->tinggi || $produk->bahan || $produk->ketebalan;
+            @endphp
+            @if($hasSpek)
+                <div class="mb-5">
+                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">Spesifikasi Ukuran & Bahan</h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        @if($produk->panjang)
+                        <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-3 flex items-start gap-3">
+                            <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="move-horizontal" class="w-4 h-4 text-primary dark:text-amber-200"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] uppercase tracking-wider text-gray-400 dark:text-gray-500 font-semibold mb-0.5">Panjang</p>
+                                <p class="text-sm font-semibold text-gray-800 dark:text-gray-200">{{ $produk->panjang }} cm</p>
+                            </div>
+                        </div>
+                        @endif
+                        @if($produk->lebar)
+                        <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-3 flex items-start gap-3">
+                            <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="move-vertical" class="w-4 h-4 text-primary dark:text-amber-200"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] uppercase tracking-wider text-gray-400 dark:text-gray-500 font-semibold mb-0.5">Lebar</p>
+                                <p class="text-sm font-semibold text-gray-800 dark:text-gray-200">{{ $produk->lebar }} cm</p>
+                            </div>
+                        </div>
+                        @endif
+                        @if($produk->tinggi)
+                        <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-3 flex items-start gap-3">
+                            <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="arrow-up-down" class="w-4 h-4 text-primary dark:text-amber-200"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] uppercase tracking-wider text-gray-400 dark:text-gray-500 font-semibold mb-0.5">Tinggi</p>
+                                <p class="text-sm font-semibold text-gray-800 dark:text-gray-200">{{ $produk->tinggi }} cm</p>
+                            </div>
+                        </div>
+                        @endif
+                        @if($produk->bahan)
+                        <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-3 flex items-start gap-3 sm:col-span-2">
+                            <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="layers" class="w-4 h-4 text-primary dark:text-amber-200"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] uppercase tracking-wider text-gray-400 dark:text-gray-500 font-semibold mb-0.5">Bahan</p>
+                                <p class="text-sm font-semibold text-gray-800 dark:text-gray-200">{{ $produk->bahan }}</p>
+                            </div>
+                        </div>
+                        @endif
+                        @if($produk->ketebalan)
+                        <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-3 flex items-start gap-3">
+                            <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="minus-square" class="w-4 h-4 text-primary dark:text-amber-200"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] uppercase tracking-wider text-gray-400 dark:text-gray-500 font-semibold mb-0.5">Ketebalan</p>
+                                <p class="text-sm font-semibold text-gray-800 dark:text-gray-200">{{ $produk->ketebalan }} mm</p>
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+            @endif
+
             <div class="grid grid-cols-2 gap-4 pt-4 border-t border-gray-100 dark:border-gray-700 text-sm">
                 <div>
                     <p class="text-gray-400 text-xs uppercase tracking-wide">Ditambahkan</p>
@@ -165,12 +231,7 @@
 </div>
 
 {{-- 3D Preview (Sketchfab Style Full Width Bottom) --}}
-@php
-    $ext3d = $produk->desain_produk_3d ? strtolower(pathinfo($produk->desain_produk_3d, PATHINFO_EXTENSION)) : '';
-    $is3dPreviewable = in_array($ext3d, ['glb', 'gltf']);
-@endphp
-
-@if($is3dPreviewable)
+@if($produk->desain_produk_3d)
 <div class="mt-8 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
     <div class="p-4 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
         <div class="flex items-center gap-2">
@@ -178,21 +239,32 @@
             <h3 class="font-semibold text-gray-800 dark:text-white text-base">3D Interactive Viewer</h3>
         </div>
         <div class="text-xs text-gray-500 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full flex items-center gap-1.5 hidden md:flex">
-            <i data-lucide="mouse-pointer-click" class="w-3.5 h-3.5"></i> Scroll to zoom, Drag to rotate
+            <i data-lucide="mouse-pointer-click" class="w-3.5 h-3.5"></i> Interaktif 3D Preview
         </div>
     </div>
     <div class="w-full h-[600px] md:h-[75vh] bg-gradient-to-b from-gray-50 to-gray-200 dark:from-gray-900 dark:to-gray-800 relative">
-        <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-        <model-viewer 
-            src="{{ $produk->desain3d_url }}" 
-            alt="3D Model Preview" 
-            auto-rotate 
-            camera-controls 
-            class="w-full h-full outline-none"
-            shadow-intensity="1"
-            environment-image="neutral"
-            exposure="1.0">
-        </model-viewer>
+        @if($produk->desain_3d_type === 'embed')
+            <iframe 
+                src="{{ $produk->desain3d_url }}" 
+                title="3D Model Viewer"
+                class="w-full h-full border-0 bg-transparent"
+                allowfullscreen
+                allow="autoplay; fullscreen; vr; xr-spatial-tracking; web-share"
+                referrerpolicy="origin-when-cross-origin">
+            </iframe>
+        @else
+            <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+            <model-viewer 
+                src="{{ $produk->desain3d_url }}" 
+                alt="3D Model Preview" 
+                auto-rotate 
+                camera-controls 
+                class="w-full h-full outline-none"
+                shadow-intensity="1"
+                environment-image="neutral"
+                exposure="1.0">
+            </model-viewer>
+        @endif
     </div>
 </div>
 @endif

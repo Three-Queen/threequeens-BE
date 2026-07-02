@@ -74,12 +74,15 @@ class ProdukController extends Controller
             $data['gambar_produk'] = $file->storeAs('produk/gambar', $filename, 'public');
         }
 
-        // Upload desain 3D
-        if ($request->hasFile('desain_produk_3d')) {
-            $file = $request->file('desain_produk_3d');
+        // Desain 3D: file GLB atau embed URL
+        if ($request->hasFile('desain_produk_3d_file')) {
+            $file = $request->file('desain_produk_3d_file');
             $filename = pathinfo($file->hashName(), PATHINFO_FILENAME).'.'.$file->getClientOriginalExtension();
             $data['desain_produk_3d'] = $file->storeAs('produk/3d', $filename, 'public');
+        } elseif ($request->filled('desain_produk_3d_embed')) {
+            $data['desain_produk_3d'] = $request->input('desain_produk_3d_embed');
         }
+        unset($data['desain_produk_3d_file'], $data['desain_produk_3d_embed']);
 
         // Upload desain 2D
         if ($request->hasFile('desain_produk_2d')) {
@@ -148,17 +151,26 @@ class ProdukController extends Controller
             unset($data['gambar_produk']);
         }
 
-        // Upload desain 3D
-        if ($request->hasFile('desain_produk_3d')) {
-            if ($produk->desain_produk_3d) {
+        // Desain 3D: file GLB atau embed URL
+        if ($request->hasFile('desain_produk_3d_file')) {
+            // Hapus file lama jika ada (hanya jika bukan embed URL)
+            if ($produk->desain_produk_3d && !str_starts_with($produk->desain_produk_3d, 'http')) {
                 StorageHelper::deleteSafe($produk->desain_produk_3d);
             }
-            $file = $request->file('desain_produk_3d');
+            $file = $request->file('desain_produk_3d_file');
             $filename = pathinfo($file->hashName(), PATHINFO_FILENAME).'.'.$file->getClientOriginalExtension();
             $data['desain_produk_3d'] = $file->storeAs('produk/3d', $filename, 'public');
+        } elseif ($request->filled('desain_produk_3d_embed')) {
+            // Hapus file lama jika ada (hanya jika bukan embed URL)
+            if ($produk->desain_produk_3d && !str_starts_with($produk->desain_produk_3d, 'http')) {
+                StorageHelper::deleteSafe($produk->desain_produk_3d);
+            }
+            $data['desain_produk_3d'] = $request->input('desain_produk_3d_embed');
         } else {
+            // Tidak ada input baru → pertahankan nilai lama
             unset($data['desain_produk_3d']);
         }
+        unset($data['desain_produk_3d_file'], $data['desain_produk_3d_embed']);
 
         // Upload desain 2D
         if ($request->hasFile('desain_produk_2d')) {
@@ -205,7 +217,8 @@ class ProdukController extends Controller
         if ($produk->gambar_produk) {
             StorageHelper::deleteSafe($produk->gambar_produk);
         }
-        if ($produk->desain_produk_3d) {
+        // Hapus file 3D jika berupa file lokal (bukan embed URL)
+        if ($produk->desain_produk_3d && !str_starts_with($produk->desain_produk_3d, 'http')) {
             StorageHelper::deleteSafe($produk->desain_produk_3d);
         }
         if ($produk->desain_produk_2d) {
@@ -238,7 +251,8 @@ class ProdukController extends Controller
         if ($produk->gambar_produk) {
             StorageHelper::deleteSafe($produk->gambar_produk);
         }
-        if ($produk->desain_produk_3d) {
+        // Hapus file 3D jika berupa file lokal (bukan embed URL)
+        if ($produk->desain_produk_3d && !str_starts_with($produk->desain_produk_3d, 'http')) {
             StorageHelper::deleteSafe($produk->desain_produk_3d);
         }
         if ($produk->desain_produk_2d) {
